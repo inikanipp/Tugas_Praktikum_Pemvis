@@ -12,16 +12,30 @@ import java.io.File;
  * @author Admin
  */
 public class form extends javax.swing.JFrame {
-
+  public static String namaLengkap;
+  public static String Alamat;
+  public static String Divisi;
+  public static String Email;
+  public static String Umur;
+  public static String jenisKelamin;
+  public static String konfirmasi;
+  
     /**
      * Creates new form form
      */
     public form() {
         initComponents();
+       
+        
         try{
             File fontStyle = new File("src/resources/font/Poppins-Regular.ttf");
-            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(12f);
-            jLabel1.setFont(font);
+            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(52f);
+            Font font1 = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(24f);
+            Font font36 = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(36f);
+            jLabelTitle.setFont(font);
+            jLabelSubTitle.setFont(font1);
+            jLabelKartar.setFont(font36);
+            
         }catch(Exception e){
             e.printStackTrace();
             
@@ -37,33 +51,289 @@ public class form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        buttonGroupJenisKelamin = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        panelR = new javax.swing.JPanel();
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelNamaDepan = new javax.swing.JLabel();
+        jLabelNamaBelakang = new javax.swing.JLabel();
+        jLabelJenisKelamin = new javax.swing.JLabel();
+        jLabelDivisi = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jTextFieldNamaDepan = new javax.swing.JTextField();
+        jTextFieldNamaBelakang = new javax.swing.JTextField();
+        jRadioButtonLaki = new javax.swing.JRadioButton();
+        jRadioButtonPerempuan = new javax.swing.JRadioButton();
+        jComboBoxDivisi = new javax.swing.JComboBox<>();
+        jLabelSubTitle = new javax.swing.JLabel();
+        jLabelAlamat = new javax.swing.JLabel();
+        jTextFieldAlamat = new javax.swing.JTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jLabelUmur = new javax.swing.JLabel();
+        jTextFieldUmur = new javax.swing.JTextField();
+        jCheckBoxKonfirmasi = new javax.swing.JCheckBox();
+        jButtonSubmit = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        panelL = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelKartar = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
+        panelR.setBackground(new java.awt.Color(255, 255, 255));
+        panelR.setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(427, Short.MAX_VALUE))
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 0, 52)); // NOI18N
+        jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitle.setText("Recruitment");
+        panelR.add(jLabelTitle);
+        jLabelTitle.setBounds(20, 20, 432, 68);
+
+        jLabelNamaDepan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelNamaDepan.setText("Nama Depan");
+        panelR.add(jLabelNamaDepan);
+        jLabelNamaDepan.setBounds(30, 150, 102, 27);
+
+        jLabelNamaBelakang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelNamaBelakang.setText("Nama Belakang");
+        panelR.add(jLabelNamaBelakang);
+        jLabelNamaBelakang.setBounds(230, 150, 110, 30);
+
+        jLabelJenisKelamin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelJenisKelamin.setText("Jenis Kelamin");
+        panelR.add(jLabelJenisKelamin);
+        jLabelJenisKelamin.setBounds(30, 390, 81, 30);
+
+        jLabelDivisi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelDivisi.setText("Divisi");
+        panelR.add(jLabelDivisi);
+        jLabelDivisi.setBounds(300, 210, 32, 30);
+
+        jLabelEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelEmail.setText("Email");
+        panelR.add(jLabelEmail);
+        jLabelEmail.setBounds(30, 270, 180, 30);
+
+        jTextFieldNamaDepan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldNamaDepan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNamaDepanActionPerformed(evt);
+            }
+        });
+        panelR.add(jTextFieldNamaDepan);
+        jTextFieldNamaDepan.setBounds(30, 180, 180, 27);
+
+        jTextFieldNamaBelakang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldNamaBelakang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNamaBelakangActionPerformed(evt);
+            }
+        });
+        panelR.add(jTextFieldNamaBelakang);
+        jTextFieldNamaBelakang.setBounds(230, 180, 210, 26);
+
+        buttonGroupJenisKelamin.add(jRadioButtonLaki);
+        jRadioButtonLaki.setText("Laki-Laki");
+        jRadioButtonLaki.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLakiActionPerformed(evt);
+            }
+        });
+        panelR.add(jRadioButtonLaki);
+        jRadioButtonLaki.setBounds(30, 420, 100, 30);
+
+        buttonGroupJenisKelamin.add(jRadioButtonPerempuan);
+        jRadioButtonPerempuan.setText("Perempuan");
+        jRadioButtonPerempuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonPerempuanActionPerformed(evt);
+            }
+        });
+        panelR.add(jRadioButtonPerempuan);
+        jRadioButtonPerempuan.setBounds(120, 420, 100, 30);
+
+        jComboBoxDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PSDM", "PENGEMBANGAN", "KURIKULUM", "KOMINFO", "HUMAS" }));
+        jComboBoxDivisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDivisiActionPerformed(evt);
+            }
+        });
+        panelR.add(jComboBoxDivisi);
+        jComboBoxDivisi.setBounds(300, 240, 140, 30);
+
+        jLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSubTitle.setText("Panitia 17 Agustus 1945");
+        panelR.add(jLabelSubTitle);
+        jLabelSubTitle.setBounds(80, 70, 320, 40);
+
+        jLabelAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelAlamat.setText("Alamat");
+        panelR.add(jLabelAlamat);
+        jLabelAlamat.setBounds(30, 210, 50, 30);
+
+        jTextFieldAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        panelR.add(jTextFieldAlamat);
+        jTextFieldAlamat.setBounds(30, 240, 260, 30);
+
+        jTextFieldEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEmailActionPerformed(evt);
+            }
+        });
+        panelR.add(jTextFieldEmail);
+        jTextFieldEmail.setBounds(30, 300, 260, 30);
+
+        jLabelUmur.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelUmur.setText("Umur");
+        panelR.add(jLabelUmur);
+        jLabelUmur.setBounds(30, 330, 35, 30);
+
+        jTextFieldUmur.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        panelR.add(jTextFieldUmur);
+        jTextFieldUmur.setBounds(30, 360, 130, 30);
+
+        jCheckBoxKonfirmasi.setText("Saya Mengonfirmasi Pengisian Formulir Diatas");
+        jCheckBoxKonfirmasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxKonfirmasiActionPerformed(evt);
+            }
+        });
+        panelR.add(jCheckBoxKonfirmasi);
+        jCheckBoxKonfirmasi.setBounds(30, 480, 330, 20);
+
+        jButtonSubmit.setBackground(new java.awt.Color(0, 255, 0));
+        jButtonSubmit.setText("Submit");
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitActionPerformed(evt);
+            }
+        });
+        panelR.add(jButtonSubmit);
+        jButtonSubmit.setBounds(330, 530, 72, 23);
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 0));
+        jButton2.setText("Reset");
+        panelR.add(jButton2);
+        jButton2.setBounds(190, 530, 72, 23);
+
+        jButton3.setBackground(new java.awt.Color(255, 0, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Cancel");
+        panelR.add(jButton3);
+        jButton3.setBounds(30, 530, 72, 23);
+
+        getContentPane().add(panelR);
+        panelR.setBounds(210, 0, 810, 580);
+
+        panelL.setBackground(new java.awt.Color(0, 51, 51));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\char.png")); // NOI18N
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\logo.png")); // NOI18N
+        jLabel5.setText("jLabel5");
+
+        jLabelKartar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabelKartar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelKartar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelKartar.setText("kartar");
+
+        javax.swing.GroupLayout panelLLayout = new javax.swing.GroupLayout(panelL);
+        panelL.setLayout(panelLLayout);
+        panelLLayout.setHorizontalGroup(
+            panelLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLLayout.createSequentialGroup()
+                .addGroup(panelLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelLLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelKartar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+        panelLLayout.setVerticalGroup(
+            panelLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelKartar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(654, 308));
+        getContentPane().add(panelL);
+        panelL.setBounds(0, 0, 212, 580);
+
+        setSize(new java.awt.Dimension(696, 616));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jRadioButtonPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPerempuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonPerempuanActionPerformed
+
+    private void jTextFieldNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaDepanActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextFieldNamaDepanActionPerformed
+
+    private void jTextFieldNamaBelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaBelakangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNamaBelakangActionPerformed
+
+    private void jComboBoxDivisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDivisiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDivisiActionPerformed
+
+    private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEmailActionPerformed
+
+    private void jRadioButtonLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLakiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonLakiActionPerformed
+
+    private void jCheckBoxKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxKonfirmasiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxKonfirmasiActionPerformed
+
+    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        namaLengkap = jTextFieldNamaDepan.getText();
+        Alamat = jTextFieldAlamat.getText();
+        Divisi = jComboBoxDivisi.getSelectedItem().toString();
+        Email = jTextFieldEmail.getText();
+        Umur = jTextFieldUmur.getText();
+        jenisKelamin = ;
+        konfirmasi;
+        
+        
+        form1 output = new form1();
+        output.setVisible(true);
+    }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,6 +371,33 @@ public class form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.ButtonGroup buttonGroupJenisKelamin;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonSubmit;
+    private javax.swing.JCheckBox jCheckBoxKonfirmasi;
+    private javax.swing.JComboBox<String> jComboBoxDivisi;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelAlamat;
+    private javax.swing.JLabel jLabelDivisi;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelJenisKelamin;
+    private javax.swing.JLabel jLabelKartar;
+    private javax.swing.JLabel jLabelNamaBelakang;
+    private javax.swing.JLabel jLabelNamaDepan;
+    private javax.swing.JLabel jLabelSubTitle;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelUmur;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButtonLaki;
+    private javax.swing.JRadioButton jRadioButtonPerempuan;
+    private javax.swing.JTextField jTextFieldAlamat;
+    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldNamaBelakang;
+    public javax.swing.JTextField jTextFieldNamaDepan;
+    private javax.swing.JTextField jTextFieldUmur;
+    private javax.swing.JPanel panelL;
+    private javax.swing.JPanel panelR;
     // End of variables declaration//GEN-END:variables
 }
