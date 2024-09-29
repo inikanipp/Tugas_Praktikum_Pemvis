@@ -13,21 +13,14 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class form extends javax.swing.JFrame {
-  public static String namaLengkap;
-  public static String Alamat;
-  public static String Divisi;
-  public static String Email;
-  public static String Umur;
-  public static String jenisKelamin;
-  public static String konfirmasi;
+  public static String namaLengkap, Alamat, Divisi, Email, Umur, jenisKelamin, konfirmasi;
   
     /**
      * Creates new form form
      */
+  
     public form() {
         initComponents();
-       
-        
         try{
             File fontStyle = new File("src/resources/font/Poppins-Regular.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(52f);
@@ -74,8 +67,8 @@ public class form extends javax.swing.JFrame {
         jTextFieldUmur = new javax.swing.JTextField();
         jCheckBoxKonfirmasi = new javax.swing.JCheckBox();
         jButtonSubmit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonReset = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
         panelL = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -168,7 +161,8 @@ public class form extends javax.swing.JFrame {
         panelR.add(jRadioButtonPerempuan);
         jRadioButtonPerempuan.setBounds(120, 420, 100, 30);
 
-        jComboBoxDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PSDM", "PENGEMBANGAN", "KURIKULUM", "KOMINFO", "HUMAS" }));
+        jComboBoxDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Divisi --", "PSDM", "PENGEMBANGAN", "KURIKULUM", "KOMINFO", "HUMAS" }));
+        jComboBoxDivisi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jComboBoxDivisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDivisiActionPerformed(evt);
@@ -176,6 +170,7 @@ public class form extends javax.swing.JFrame {
         });
         panelR.add(jComboBoxDivisi);
         jComboBoxDivisi.setBounds(300, 240, 140, 30);
+        jComboBoxDivisi.getAccessibleContext().setAccessibleName("");
 
         jLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -190,7 +185,7 @@ public class form extends javax.swing.JFrame {
 
         jTextFieldAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         panelR.add(jTextFieldAlamat);
-        jTextFieldAlamat.setBounds(30, 240, 260, 30);
+        jTextFieldAlamat.setBounds(30, 240, 250, 30);
 
         jTextFieldEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +214,9 @@ public class form extends javax.swing.JFrame {
         panelR.add(jCheckBoxKonfirmasi);
         jCheckBoxKonfirmasi.setBounds(30, 480, 330, 20);
 
-        jButtonSubmit.setBackground(new java.awt.Color(0, 255, 0));
+        jButtonSubmit.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonSubmit.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSubmit.setText("Submit");
         jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,27 +226,35 @@ public class form extends javax.swing.JFrame {
         panelR.add(jButtonSubmit);
         jButtonSubmit.setBounds(330, 530, 72, 23);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 0));
-        jButton2.setText("Reset");
-        panelR.add(jButton2);
-        jButton2.setBounds(190, 530, 72, 23);
+        jButtonReset.setBackground(new java.awt.Color(255, 255, 0));
+        jButtonReset.setText("Reset");
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
+            }
+        });
+        panelR.add(jButtonReset);
+        jButtonReset.setBounds(190, 530, 72, 23);
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Cancel");
-        panelR.add(jButton3);
-        jButton3.setBounds(30, 530, 72, 23);
+        jButtonCancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        panelR.add(jButtonCancel);
+        jButtonCancel.setBounds(30, 530, 72, 23);
 
         getContentPane().add(panelR);
         panelR.setBounds(210, 0, 810, 580);
 
         panelL.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/char.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\char.png")); // NOI18N
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/logo.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\logo.png")); // NOI18N
         jLabel5.setText("jLabel5");
 
         jLabelKartar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -295,11 +300,14 @@ public class form extends javax.swing.JFrame {
 
     private void jRadioButtonPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPerempuanActionPerformed
         // TODO add your handling code here:
+      
+        
     }//GEN-LAST:event_jRadioButtonPerempuanActionPerformed
 
     private void jTextFieldNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaDepanActionPerformed
         // TODO add your handling code here:
         
+              
     }//GEN-LAST:event_jTextFieldNamaDepanActionPerformed
 
     private void jTextFieldNamaBelakangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaBelakangActionPerformed
@@ -323,7 +331,7 @@ public class form extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxKonfirmasiActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        namaLengkap = jTextFieldNamaDepan.getText();
+        namaLengkap = jTextFieldNamaDepan.getText() +" "+ jTextFieldNamaBelakang.getText() ;
         Alamat = jTextFieldAlamat.getText();
         Divisi = jComboBoxDivisi.getSelectedItem().toString();
         Email = jTextFieldEmail.getText();
@@ -334,11 +342,7 @@ public class form extends javax.swing.JFrame {
         } else if (jRadioButtonPerempuan.isSelected()) {
             jenisKelamin = "Perempuan";
         }
-        
-        
-        
-        
-        
+ 
         if(jCheckBoxKonfirmasi.isSelected()){
             konfirmasi = "true";
             String [] var = {namaLengkap, Alamat, Divisi, Email, Umur, jenisKelamin, konfirmasi};
@@ -348,29 +352,46 @@ public class form extends javax.swing.JFrame {
                 System.out.println("i : " + i);
                 System.out.println("variabel " + namaLengkap);
                 a+=1;
-            if (i == null){
+            if (i == null || i.equals("-- Divisi --")){
                 status = "false";
 //                JOptionPane.showMessageDialog(this, "Warning Boss", i, JOptionPane.WARNING_MESSAGE);
 //                System.out.println("a : " + a);
 //                break;
                 }
+
             }
             if (status.equals("false") && a == 7){
-                JOptionPane.showMessageDialog(this, "Warning Boss", "anjas",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Diiisi semua wak textfieldnya!", "warning",JOptionPane.WARNING_MESSAGE);
                 }
             if (status.equals("true") && a == 7){
                 form1 output = new form1();
                 output.setVisible(true);
                 dispose();
                 }
-            
         }
         else{
-            JOptionPane.showMessageDialog(this, "Pesan", "Judul", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Checkbox lupa dicentang ta bos?", "warning", JOptionPane.WARNING_MESSAGE);
         }
         
         
     }//GEN-LAST:event_jButtonSubmitActionPerformed
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNamaDepan.setText("");
+        jTextFieldNamaBelakang.setText("");
+        jTextFieldAlamat.setText("");
+        jComboBoxDivisi.setSelectedIndex(0);
+        jTextFieldEmail.setText("");
+        jTextFieldUmur.setText("");
+        buttonGroupJenisKelamin.clearSelection();
+        jCheckBoxKonfirmasi.setSelected(false);
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,8 +430,8 @@ public class form extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupJenisKelamin;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonReset;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JCheckBox jCheckBoxKonfirmasi;
     private javax.swing.JComboBox<String> jComboBoxDivisi;
