@@ -6,6 +6,7 @@ package tugas1;
 
 import java.awt.Font;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,7 +137,7 @@ public class form extends javax.swing.JFrame {
             }
         });
         panelR.add(jTextFieldNamaDepan);
-        jTextFieldNamaDepan.setBounds(30, 180, 180, 27);
+        jTextFieldNamaDepan.setBounds(30, 180, 180, 30);
 
         jTextFieldNamaBelakang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextFieldNamaBelakang.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +146,7 @@ public class form extends javax.swing.JFrame {
             }
         });
         panelR.add(jTextFieldNamaBelakang);
-        jTextFieldNamaBelakang.setBounds(230, 180, 210, 26);
+        jTextFieldNamaBelakang.setBounds(230, 180, 210, 30);
 
         buttonGroupJenisKelamin.add(jRadioButtonLaki);
         jRadioButtonLaki.setText("Laki-Laki");
@@ -245,10 +246,10 @@ public class form extends javax.swing.JFrame {
 
         panelL.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\char.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/char.png"))); // NOI18N
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\logo.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/logo.png"))); // NOI18N
         jLabel5.setText("jLabel5");
 
         jLabelKartar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -286,7 +287,7 @@ public class form extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelL);
-        panelL.setBounds(0, 0, 212, 580);
+        panelL.setBounds(0, 0, 210, 580);
 
         setSize(new java.awt.Dimension(696, 616));
         setLocationRelativeTo(null);
@@ -327,12 +328,48 @@ public class form extends javax.swing.JFrame {
         Divisi = jComboBoxDivisi.getSelectedItem().toString();
         Email = jTextFieldEmail.getText();
         Umur = jTextFieldUmur.getText();
-        jenisKelamin = ;
-        konfirmasi;
+        
+        if (jRadioButtonLaki.isSelected()) {
+            jenisKelamin = "Laki-Laki";
+        } else if (jRadioButtonPerempuan.isSelected()) {
+            jenisKelamin = "Perempuan";
+        }
         
         
-        form1 output = new form1();
-        output.setVisible(true);
+        
+        
+        
+        if(jCheckBoxKonfirmasi.isSelected()){
+            konfirmasi = "true";
+            String [] var = {namaLengkap, Alamat, Divisi, Email, Umur, jenisKelamin, konfirmasi};
+            int a = 0;
+            String status = "true";
+            for (String i : var){
+                System.out.println("i : " + i);
+                System.out.println("variabel " + namaLengkap);
+                a+=1;
+            if (i == null){
+                status = "false";
+//                JOptionPane.showMessageDialog(this, "Warning Boss", i, JOptionPane.WARNING_MESSAGE);
+//                System.out.println("a : " + a);
+//                break;
+                }
+            }
+            if (status.equals("false") && a == 7){
+                JOptionPane.showMessageDialog(this, "Warning Boss", "anjas",JOptionPane.WARNING_MESSAGE);
+                }
+            if (status.equals("true") && a == 7){
+                form1 output = new form1();
+                output.setVisible(true);
+                dispose();
+                }
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Pesan", "Judul", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     /**

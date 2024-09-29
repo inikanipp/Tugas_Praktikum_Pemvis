@@ -18,7 +18,7 @@ public class form1 extends javax.swing.JFrame {
      */
     public form1() {
         initComponents();
-        jLabelOutName.setText(form.namaDepan);
+        jLabelOutName.setText(form.namaLengkap);
         
         try{
             File fontStyle = new File("src/resources/font/Poppins-Regular.ttf");
@@ -170,7 +170,7 @@ public class form1 extends javax.swing.JFrame {
         panelL.setBackground(new java.awt.Color(0, 51, 51));
         panelL.setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\char.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/char.png"))); // NOI18N
         panelL.add(jLabel2);
         jLabel2.setBounds(480, 0, 200, 140);
 
