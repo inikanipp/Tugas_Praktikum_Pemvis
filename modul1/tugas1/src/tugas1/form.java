@@ -8,16 +8,9 @@ import java.awt.Font;
 import java.io.File;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
+
 public class form extends javax.swing.JFrame {
   public static String namaLengkap, Alamat, Divisi, Email, Umur, jenisKelamin, konfirmasi;
-  
-    /**
-     * Creates new form form
-     */
   
     public form() {
         initComponents();
@@ -127,6 +120,14 @@ public class form extends javax.swing.JFrame {
         jTextFieldNamaDepan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNamaDepanActionPerformed(evt);
+            }
+        });
+        jTextFieldNamaDepan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNamaDepanKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNamaDepanKeyTyped(evt);
             }
         });
         panelR.add(jTextFieldNamaDepan);
@@ -251,10 +252,10 @@ public class form extends javax.swing.JFrame {
 
         panelL.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\char.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/char.png"))); // NOI18N
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("E:\\TUGAS\\Tugas_Praktikum_Pemvis\\modul1\\tugas1\\src\\resources\\img\\logo.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/img/logo.png"))); // NOI18N
         jLabel5.setText("jLabel5");
 
         jLabelKartar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -299,14 +300,11 @@ public class form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPerempuanActionPerformed
-        // TODO add your handling code here:
-      
         
     }//GEN-LAST:event_jRadioButtonPerempuanActionPerformed
 
     private void jTextFieldNamaDepanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaDepanActionPerformed
-        // TODO add your handling code here:
-        
+      
               
     }//GEN-LAST:event_jTextFieldNamaDepanActionPerformed
 
@@ -336,6 +334,7 @@ public class form extends javax.swing.JFrame {
         Divisi = jComboBoxDivisi.getSelectedItem().toString();
         Email = jTextFieldEmail.getText();
         Umur = jTextFieldUmur.getText();
+        System.out.println("tipe data : " + jComboBoxDivisi.getSelectedItem());
         
         if (jRadioButtonLaki.isSelected()) {
             jenisKelamin = "Laki-Laki";
@@ -354,11 +353,8 @@ public class form extends javax.swing.JFrame {
                 a+=1;
             if (i == null || i.equals("-- Divisi --")){
                 status = "false";
-//                JOptionPane.showMessageDialog(this, "Warning Boss", i, JOptionPane.WARNING_MESSAGE);
-//                System.out.println("a : " + a);
-//                break;
-                }
 
+                }
             }
             if (status.equals("false") && a == 7){
                 JOptionPane.showMessageDialog(this, "Diiisi semua wak textfieldnya!", "warning",JOptionPane.WARNING_MESSAGE);
@@ -367,7 +363,7 @@ public class form extends javax.swing.JFrame {
                 form1 output = new form1();
                 output.setVisible(true);
                 dispose();
-                }
+            }
         }
         else{
             JOptionPane.showMessageDialog(this, "Checkbox lupa dicentang ta bos?", "warning", JOptionPane.WARNING_MESSAGE);
@@ -392,6 +388,14 @@ public class form extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jTextFieldNamaDepanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNamaDepanKeyReleased
+        
+    }//GEN-LAST:event_jTextFieldNamaDepanKeyReleased
+
+    private void jTextFieldNamaDepanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNamaDepanKeyTyped
+
+    }//GEN-LAST:event_jTextFieldNamaDepanKeyTyped
 
     /**
      * @param args the command line arguments
