@@ -10,15 +10,17 @@ import com.formdev.flatlaf.ui.FlatRoundBorder;
 import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+
 /**
  *
  * @author Admin
  */
 public class tokoObat extends javax.swing.JFrame {
-
-    /**
-     * Creates new form tokoObat
-     */
+    int detail = 0;
+    
+    
+   
+   
     public tokoObat() {
         initComponents();
         jButtonBox1.setVisible(false);
@@ -30,6 +32,7 @@ public class tokoObat extends javax.swing.JFrame {
         jButtonBox7.setVisible(false);
         jButtonBox8.setVisible(false);
         jButtonBox9.setVisible(false);
+        
         try{
             File fontStyle = new File("src/iniapotek/Poppins-Regular.ttf");
             Font font18 = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(18f);
@@ -59,50 +62,48 @@ public class tokoObat extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelRight = new javax.swing.JPanel();
         jPanel2 = new RoundedPanel(15, new Color(255,255,255));
         jPanel3 = new RoundedPanel(15, new Color(0,0,0));
         jLabelPilihObat = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanelBox1 = new javax.swing.JPanel();
+        jPanelBox1 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox1 = new javax.swing.JButton();
         jLabelBox1 = new javax.swing.JLabel();
-        jPanelBox2 = new javax.swing.JPanel();
+        jPanelBox2 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox2 = new javax.swing.JButton();
         jLabelBox2 = new javax.swing.JLabel();
-        jPanelBox3 = new javax.swing.JPanel();
+        jPanelBox3 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox3 = new javax.swing.JButton();
         jLabelBox3 = new javax.swing.JLabel();
-        jPanelBox4 = new javax.swing.JPanel();
+        jPanelBox4 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox4 = new javax.swing.JButton();
         jLabelBox4 = new javax.swing.JLabel();
-        jPanelBox5 = new javax.swing.JPanel();
+        jPanelBox5 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox5 = new javax.swing.JButton();
         jLabelBox5 = new javax.swing.JLabel();
-        jPanelBox6 = new javax.swing.JPanel();
+        jPanelBox6 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox6 = new javax.swing.JButton();
         jLabelBox6 = new javax.swing.JLabel();
-        jPanelBox7 = new javax.swing.JPanel();
+        jPanelBox7 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox7 = new javax.swing.JButton();
         jLabelBox7 = new javax.swing.JLabel();
-        jPanelBox8 = new javax.swing.JPanel();
+        jPanelBox8 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox8 = new javax.swing.JButton();
         jLabelBox8 = new javax.swing.JLabel();
-        jPanelBox9 = new javax.swing.JPanel();
+        jPanelBox9 = new RoundedPanel(15, new Color(242,242,242));
         jButtonBox9 = new javax.swing.JButton();
         jLabelBox9 = new javax.swing.JLabel();
         jPanel5 = new RoundedPanel(15, new Color(242,242,242));
         jLabelDetailGambar = new javax.swing.JLabel();
         jLabelDetailTittle = new javax.swing.JLabel();
-        jLabelDeskripsi = new javax.swing.JLabel();
         jButtonBeli = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabelJumlah = new javax.swing.JLabel();
         jLabelTotal = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPaneDetail = new javax.swing.JTextPane();
         jPanel6 = new RoundedPanel(15, new Color(0,0,0));
         jLabelDetail = new javax.swing.JLabel();
         jPanelLeft = new javax.swing.JPanel();
@@ -141,6 +142,7 @@ public class tokoObat extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 430, 30));
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
 
         jPanelBox1.setBackground(new java.awt.Color(255, 51, 153));
@@ -154,8 +156,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox1MouseEntered(evt);
             }
         });
+        jButtonBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox1ActionPerformed(evt);
+            }
+        });
         jPanelBox1.add(jButtonBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/1.png"))); // NOI18N
         jLabelBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox1MouseEntered(evt);
@@ -179,8 +187,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox2MouseEntered(evt);
             }
         });
+        jButtonBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox2ActionPerformed(evt);
+            }
+        });
         jPanelBox2.add(jButtonBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/2.png"))); // NOI18N
         jLabelBox2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox2MouseEntered(evt);
@@ -204,8 +218,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox3MouseEntered(evt);
             }
         });
+        jButtonBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox3ActionPerformed(evt);
+            }
+        });
         jPanelBox3.add(jButtonBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/3.png"))); // NOI18N
         jLabelBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox3MouseEntered(evt);
@@ -229,8 +249,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox4MouseEntered(evt);
             }
         });
+        jButtonBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox4ActionPerformed(evt);
+            }
+        });
         jPanelBox4.add(jButtonBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/4.png"))); // NOI18N
         jLabelBox4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox4MouseEntered(evt);
@@ -254,8 +280,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox5MouseEntered(evt);
             }
         });
+        jButtonBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox5ActionPerformed(evt);
+            }
+        });
         jPanelBox5.add(jButtonBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/5.png"))); // NOI18N
         jLabelBox5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox5MouseEntered(evt);
@@ -279,8 +311,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox6MouseEntered(evt);
             }
         });
+        jButtonBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox6ActionPerformed(evt);
+            }
+        });
         jPanelBox6.add(jButtonBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/6.png"))); // NOI18N
         jLabelBox6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox6MouseEntered(evt);
@@ -304,8 +342,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox7MouseEntered(evt);
             }
         });
+        jButtonBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox7ActionPerformed(evt);
+            }
+        });
         jPanelBox7.add(jButtonBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/7.png"))); // NOI18N
         jLabelBox7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox7MouseEntered(evt);
@@ -329,8 +373,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox8MouseEntered(evt);
             }
         });
+        jButtonBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox8ActionPerformed(evt);
+            }
+        });
         jPanelBox8.add(jButtonBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/8.png"))); // NOI18N
         jLabelBox8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox8MouseEntered(evt);
@@ -354,8 +404,14 @@ public class tokoObat extends javax.swing.JFrame {
                 jButtonBox9MouseEntered(evt);
             }
         });
+        jButtonBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBox9ActionPerformed(evt);
+            }
+        });
         jPanelBox9.add(jButtonBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabelBox9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniapotek/img/9.png"))); // NOI18N
         jLabelBox9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBox9MouseEntered(evt);
@@ -375,8 +431,6 @@ public class tokoObat extends javax.swing.JFrame {
         jLabelDetailTittle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelDetailTittle.setText("jLabel3");
 
-        jLabelDeskripsi.setText("jLabel4");
-
         jButtonBeli.setText("Beli");
 
         jButtonCancel.setBackground(new java.awt.Color(0, 0, 0));
@@ -386,8 +440,6 @@ public class tokoObat extends javax.swing.JFrame {
             }
         });
 
-        jLabelJumlah.setText("Jumlah");
-
         jLabelTotal.setText("Total");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -395,6 +447,9 @@ public class tokoObat extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+
+        jTextPaneDetail.setEditable(false);
+        jScrollPane2.setViewportView(jTextPaneDetail);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -404,22 +459,17 @@ public class tokoObat extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabelJumlah))
+                                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jButtonBeli, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                         .addComponent(jTextField1))))
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabelDeskripsi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelDetailTittle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
+                            .addComponent(jLabelDetailTittle, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jLabelDetailGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -432,16 +482,12 @@ public class tokoObat extends javax.swing.JFrame {
                 .addComponent(jLabelDetailGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelDetailTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(jLabelDeskripsi, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelJumlah)
-                    .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBeli, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -658,6 +704,74 @@ public class tokoObat extends javax.swing.JFrame {
         jButtonBox9.setVisible(false);
     }//GEN-LAST:event_jLabelBox9MouseExited
 
+    private void jButtonBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox1ActionPerformed
+        // TODO add your handling code here:
+        detail = 1;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+        jTextPaneDetail.setText("Paracetamol 500mg\n" +
+"Obat pereda nyeri dan demam\n" +
+"Efektif untuk mengurangi rasa\n" +
+"nyeri, aman untuk digunakan.");
+
+    }//GEN-LAST:event_jButtonBox1ActionPerformed
+
+    private void jButtonBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox2ActionPerformed
+        // TODO add your handling code here:
+        detail = 2;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox2ActionPerformed
+
+    private void jButtonBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox3ActionPerformed
+        // TODO add your handling code here:
+        detail = 3;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox3ActionPerformed
+
+    private void jButtonBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox4ActionPerformed
+        // TODO add your handling code here:
+        detail = 4;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox4ActionPerformed
+
+    private void jButtonBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox5ActionPerformed
+        // TODO add your handling code here:
+        detail = 5;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox5ActionPerformed
+
+    private void jButtonBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox6ActionPerformed
+        // TODO add your handling code here:
+        detail = 6;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox6ActionPerformed
+
+    private void jButtonBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox7ActionPerformed
+        // TODO add your handling code here:
+        detail = 7;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox7ActionPerformed
+
+    private void jButtonBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox8ActionPerformed
+        // TODO add your handling code here:
+        detail = 8;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox8ActionPerformed
+
+    private void jButtonBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBox9ActionPerformed
+        // TODO add your handling code here:
+        detail = 9;
+        ImageIcon icon = new ImageIcon("src/iniapotek/img/"+detail+".png");
+        jLabelDetailGambar.setIcon(icon);
+    }//GEN-LAST:event_jButtonBox9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -715,11 +829,9 @@ public class tokoObat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBox7;
     private javax.swing.JLabel jLabelBox8;
     private javax.swing.JLabel jLabelBox9;
-    private javax.swing.JLabel jLabelDeskripsi;
     private javax.swing.JLabel jLabelDetail;
     private javax.swing.JLabel jLabelDetailGambar;
     private javax.swing.JLabel jLabelDetailTittle;
-    private javax.swing.JLabel jLabelJumlah;
     private javax.swing.JLabel jLabelPilihObat;
     private javax.swing.JLabel jLabelTotal;
     private javax.swing.JPanel jPanel1;
@@ -739,7 +851,8 @@ public class tokoObat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelBox9;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextPane jTextPaneDetail;
     // End of variables declaration//GEN-END:variables
 }
