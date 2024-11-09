@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modul5;
+package karyawanproyekm5;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLDataException;
@@ -16,7 +16,7 @@ public class koneksi {
     
     public static java.sql.Connection getKoneksi(){
             try{
-                String url = "jdbc:mysql://localhost:3306/db_mahasiswa1";
+                String url = "jdbc:mysql://localhost:3306/db_proyek";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());

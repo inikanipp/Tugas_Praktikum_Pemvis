@@ -42,7 +42,7 @@ public class formulir extends javax.swing.JFrame {
                             res.getString("Nim"),
                             res.getString("Nama"),
                             res.getString("Kelamin"),
-                            res.getString("Email"),
+                            res.getString("Email"),   
                         }
                 );
             }
