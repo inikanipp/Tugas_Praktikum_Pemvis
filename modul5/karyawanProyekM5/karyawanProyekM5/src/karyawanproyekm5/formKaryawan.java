@@ -548,6 +548,7 @@ public class formKaryawan extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonTambahKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTambahKaryawanActionPerformed
@@ -749,26 +750,28 @@ public class formKaryawan extends javax.swing.JFrame {
         int id_proyek = 0;
         int id_karyawan = 0;
         try{
-            String sql = "select id from karyawan ;";
+            String sql = "select * from karyawan ";
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             int ulang = 1;
             while (res.next()){
-                System.out.println(ulang);
+//                System.out.println(ulang);
                 if(ulang == idKaryawan){
                     id_karyawan = res.getInt("id");
-//                    System.out.println(res.getString("id"));
+                    System.out.println(res.getString("id"));
+                    System.out.println(res.getString("nama"));
                 }
                 ulang++;
             }  
             ulang = 1;
-            String sql1 = "select id from proyek; ";
+            String sql1 = "select * from proyek ";
             java.sql.Statement stm1 = conn.createStatement();
             java.sql.ResultSet res1 = stm1.executeQuery(sql1);
-             while (res1.next()){
+            while (res1.next()){
                 if(ulang == idProyek){
-//                    System.out.println(res1.getString("id"));
+                    System.out.println(res1.getString("id"));
+                    System.out.println(res1.getString("nama_proyek"));
                     id_proyek = res1.getInt("id");
                 }
                 ulang++;
@@ -777,25 +780,27 @@ public class formKaryawan extends javax.swing.JFrame {
             String sql2 = "select id_karyawan, id_proyek from transaksi";
             java.sql.Statement stm2 = conn.createStatement();
             java.sql.ResultSet res2 = stm2.executeQuery(sql2);
+            int row2 = row1 + 1;
             while (res2.next()){
-                System.out.println("cobaa1");
-                String idKaryawanTransaksi = res2.getString("id_karyawan");
-                String idProyekTransaksi = res2.getString("id_proyek");
+                if(ulang == row1+1){
+                System.out.println("warr");
+                int idKaryawanTransaksi = res2.getInt("id_karyawan");
+                int idProyekTransaksi = res2.getInt("id_proyek");
+                System.out.println("ini row ke " + row2);
                 System.out.println(res2.getInt("id_karyawan"));
                 System.out.println(res2.getInt("id_proyek"));
-                System.out.println("cobaa2");
                 String addTransaksi = "UPDATE transaksi SET id_karyawan = ?, id_proyek = ?, peran = ? WHERE id_karyawan = ? AND id_proyek = ?;";
                 System.out.println("duarrr156234");
                 PreparedStatement ps = conn.prepareStatement(addTransaksi);
                 ps.setInt(1, id_karyawan);
                 ps.setInt(2, id_proyek);
                 ps.setString(3, jTextFieldPeran.getText());
-                ps.setString(4, idKaryawanTransaksi);
-                ps.setString(5, idProyekTransaksi);
+                ps.setInt(4, idKaryawanTransaksi);
+                ps.setInt(5, idProyekTransaksi);
                 ps.executeUpdate();
                 load_tabelTransaksi();
-                ulang++;
-            }  
+                System.out.println("berhasil");
+            }ulang++;  }
             
             
         } catch (SQLException e) {
