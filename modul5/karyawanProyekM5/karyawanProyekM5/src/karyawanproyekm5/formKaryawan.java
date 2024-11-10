@@ -458,6 +458,11 @@ public class formKaryawan extends javax.swing.JFrame {
         });
 
         jButtonDeleteTransaksi.setText("Delete");
+        jButtonDeleteTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteTransaksiActionPerformed(evt);
+            }
+        });
 
         jLabelPeran.setText("Peran");
 
@@ -801,12 +806,44 @@ public class formKaryawan extends javax.swing.JFrame {
                 load_tabelTransaksi();
                 System.out.println("berhasil");
             }ulang++;  }
-            
-            
+
         } catch (SQLException e) {
           System.out.println("Error Save Data Transaksi" + e.getMessage());
         }
     }//GEN-LAST:event_jButtonUpdateTransaksiActionPerformed
+
+    private void jButtonDeleteTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteTransaksiActionPerformed
+        // TODO add your handling code here:
+        int id_proyek = 0;
+        int id_karyawan = 0;
+        try{
+            int ulang = 1;
+            String sql2 = "select id_karyawan, id_proyek from transaksi";
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm2 = conn.createStatement();
+            java.sql.ResultSet res2 = stm2.executeQuery(sql2);
+            int row2 = row1 + 1;
+            while (res2.next()){
+                if(ulang == row1+1){
+                System.out.println("warr");
+                int idKaryawanTransaksi = res2.getInt("id_karyawan");
+                int idProyekTransaksi = res2.getInt("id_proyek");
+                System.out.println("ini row ke " + row2);
+                System.out.println(res2.getInt("id_karyawan"));
+                System.out.println(res2.getInt("id_proyek"));
+                String addTransaksi = "DELETE FROM transaksi WHERE id_karyawan = ? AND id_proyek = ?;";
+                System.out.println("duarrr156234");
+                PreparedStatement ps = conn.prepareStatement(addTransaksi);
+                ps.setInt(1, idKaryawanTransaksi);
+                ps.setInt(2, idProyekTransaksi);
+                ps.executeUpdate();
+                load_tabelTransaksi();
+                System.out.println("berhasil");
+            }ulang++;  }
+        } catch (SQLException e) {
+          System.out.println("Error Save Data Transaksi" + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonDeleteTransaksiActionPerformed
     
 
     public static void main(String args[]) {
