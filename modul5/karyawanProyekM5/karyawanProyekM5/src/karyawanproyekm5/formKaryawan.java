@@ -774,26 +774,26 @@ public class formKaryawan extends javax.swing.JFrame {
                 ulang++;
             }  
             ulang = 1;
-            
-            String sql2 = "select * from transaksi; ";
+            String sql2 = "select id_karyawan, id_proyek from transaksi";
             java.sql.Statement stm2 = conn.createStatement();
-            java.sql.ResultSet res2 = stm2.executeQuery(sql1);
-             while (res2.next()){
-                if(ulang == row1){
-                    System.out.println("cobaa1");
-                    String idKaryawanTransaksi = res2.getString("id_karyawan");
-                    String idProyekTransaksi = res2.getString("id_proyek");
-                    System.out.println("cobaa2");
-                    String addTransaksi = "UPDATE transaksi SET id_karyawan = ?, id_proyek = ?, peran = ? WHERE id_karyawan = ? AND id_proyek = ?;";
-                    PreparedStatement ps = conn.prepareStatement(addTransaksi);
-                    ps.setInt(1, id_karyawan);
-                    ps.setInt(2, id_proyek);
-                    ps.setString(3, jTextFieldPeran.getText());
-                    ps.setString(4, idKaryawanTransaksi);
-                    ps.setString(5, idProyekTransaksi);
-                    ps.executeUpdate();
-                    load_tabelTransaksi();
-                }
+            java.sql.ResultSet res2 = stm2.executeQuery(sql2);
+            while (res2.next()){
+                System.out.println("cobaa1");
+                String idKaryawanTransaksi = res2.getString("id_karyawan");
+                String idProyekTransaksi = res2.getString("id_proyek");
+                System.out.println(res2.getInt("id_karyawan"));
+                System.out.println(res2.getInt("id_proyek"));
+                System.out.println("cobaa2");
+                String addTransaksi = "UPDATE transaksi SET id_karyawan = ?, id_proyek = ?, peran = ? WHERE id_karyawan = ? AND id_proyek = ?;";
+                System.out.println("duarrr156234");
+                PreparedStatement ps = conn.prepareStatement(addTransaksi);
+                ps.setInt(1, id_karyawan);
+                ps.setInt(2, id_proyek);
+                ps.setString(3, jTextFieldPeran.getText());
+                ps.setString(4, idKaryawanTransaksi);
+                ps.setString(5, idProyekTransaksi);
+                ps.executeUpdate();
+                load_tabelTransaksi();
                 ulang++;
             }  
             
