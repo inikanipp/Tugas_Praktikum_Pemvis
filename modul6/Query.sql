@@ -43,3 +43,4 @@ INSERT INTO Wilayah (wilayah) VALUES
 ('DI Yogyakarta'),
 ('Jawa Timur'),
 ('Banten');
+db_kuliner
