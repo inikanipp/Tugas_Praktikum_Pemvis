@@ -16,10 +16,10 @@ import javax.swing.UIManager;
  *
  * @author acer
  */
-public class homepage extends javax.swing.JFrame {
+public class loginPage extends javax.swing.JFrame {
 
 
-    public homepage() {
+    public loginPage() {
         initComponents();
         jPanelGreenHomePage.setBackground(Color.decode("#02613c"));
         jPanelGreenHomePage.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
@@ -38,13 +38,13 @@ public class homepage extends javax.swing.JFrame {
             jLabelLoginPage.setForeground(Color.black);
             jLabelLoginPage.setFont(fontsb40);
             jLabelLoginPage1.setFont(fontsb40);
-            jButtonLoginUser.setFont(fontm16);
-            jButtonRegisterUser.setFont(fontm16);
+            jButtonUserLoginGreen.setFont(fontm16);
+            jButtonUserRegisterGreen.setFont(fontm16);
             
-            jLabelUsernameLogin.setFont(fontRegular14);
-            jLabelUsernameLogin.setForeground(Color.decode("#7D7D7D"));
-            jLabelPasswordLogin.setFont(fontRegular14);
-            jLabelPasswordLogin.setForeground(Color.decode("#7D7D7D"));
+            jLabelUsernameUserLogin.setFont(fontRegular14);
+            jLabelUsernameUserLogin.setForeground(Color.decode("#7D7D7D"));
+            jLabelPasswordUserLogin.setFont(fontRegular14);
+            jLabelPasswordUserLogin.setForeground(Color.decode("#7D7D7D"));
             
         }catch(Exception e){
             e.printStackTrace();
@@ -62,12 +62,12 @@ public class homepage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jButtonLoginUser = new javax.swing.JButton();
-        jButtonRegisterUser = new javax.swing.JButton();
-        jLabelUsernameLogin = new javax.swing.JLabel();
-        jLabelPasswordLogin = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jTextFieldUsernameUserLogin = new javax.swing.JTextField();
+        jButtonUserLoginGreen = new javax.swing.JButton();
+        jButtonUserRegisterGreen = new javax.swing.JButton();
+        jLabelUsernameUserLogin = new javax.swing.JLabel();
+        jLabelPasswordUserLogin = new javax.swing.JLabel();
+        jPasswordFieldUserLogin = new javax.swing.JPasswordField();
         jLabelLoginPage = new javax.swing.JLabel();
         jLabelLoginPage1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,27 +78,28 @@ public class homepage extends javax.swing.JFrame {
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(508, 616));
 
-        jButtonLoginUser.setBackground(new java.awt.Color(2, 97, 60));
-        jButtonLoginUser.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLoginUser.setText("Login");
-        jButtonLoginUser.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUserLoginGreen.setBackground(new java.awt.Color(2, 97, 60));
+        jButtonUserLoginGreen.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonUserLoginGreen.setText("Login");
+        jButtonUserLoginGreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLoginUserActionPerformed(evt);
+                jButtonUserLoginGreenActionPerformed(evt);
             }
         });
 
-        jButtonRegisterUser.setForeground(new java.awt.Color(2, 97, 60));
-        jButtonRegisterUser.setText("Register");
-        jButtonRegisterUser.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUserRegisterGreen.setForeground(new java.awt.Color(2, 97, 60));
+        jButtonUserRegisterGreen.setText("Register");
+        jButtonUserRegisterGreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegisterUserActionPerformed(evt);
+                jButtonUserRegisterGreenActionPerformed(evt);
             }
         });
 
-        jLabelUsernameLogin.setText("username");
+        jLabelUsernameUserLogin.setText("username");
 
-        jLabelPasswordLogin.setText("password");
+        jLabelPasswordUserLogin.setText("password");
 
         jLabelLoginPage.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelLoginPage.setText("Dude!");
@@ -114,17 +115,17 @@ public class homepage extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelLoginPage)
-                    .addComponent(jLabelPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUsernameLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPasswordUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLoginPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextFieldUsernameUserLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPasswordFieldUserLogin, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButtonLoginUser, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonUserLoginGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButtonRegisterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                            .addComponent(jButtonUserRegisterGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,18 +135,18 @@ public class homepage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelLoginPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jLabelUsernameLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelPasswordUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordFieldUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonRegisterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLoginUser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(237, Short.MAX_VALUE))
+                    .addComponent(jButtonUserRegisterGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUserLoginGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -153,12 +154,13 @@ public class homepage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelGreenHomePage.setBackground(new java.awt.Color(2, 97, 60));
+        jPanelGreenHomePage.setMinimumSize(new java.awt.Dimension(432, 604));
 
         javax.swing.GroupLayout jPanelGreenHomePageLayout = new javax.swing.GroupLayout(jPanelGreenHomePage);
         jPanelGreenHomePage.setLayout(jPanelGreenHomePageLayout);
         jPanelGreenHomePageLayout.setHorizontalGroup(
             jPanelGreenHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 449, Short.MAX_VALUE)
         );
         jPanelGreenHomePageLayout.setVerticalGroup(
             jPanelGreenHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +173,7 @@ public class homepage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelGreenHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelGreenHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -188,13 +190,13 @@ public class homepage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterUserActionPerformed
+    private void jButtonUserRegisterGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUserRegisterGreenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonRegisterUserActionPerformed
+    }//GEN-LAST:event_jButtonUserRegisterGreenActionPerformed
 
-    private void jButtonLoginUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginUserActionPerformed
+    private void jButtonUserLoginGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUserLoginGreenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLoginUserActionPerformed
+    }//GEN-LAST:event_jButtonUserLoginGreenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,22 +220,22 @@ public class homepage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new homepage().setVisible(true);
+                new loginPage().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLoginUser;
-    private javax.swing.JButton jButtonRegisterUser;
+    private javax.swing.JButton jButtonUserLoginGreen;
+    private javax.swing.JButton jButtonUserRegisterGreen;
     private javax.swing.JLabel jLabelLoginPage;
     private javax.swing.JLabel jLabelLoginPage1;
-    private javax.swing.JLabel jLabelPasswordLogin;
-    private javax.swing.JLabel jLabelUsernameLogin;
+    private javax.swing.JLabel jLabelPasswordUserLogin;
+    private javax.swing.JLabel jLabelUsernameUserLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelGreenHomePage;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField jPasswordFieldUserLogin;
+    private javax.swing.JTextField jTextFieldUsernameUserLogin;
     // End of variables declaration//GEN-END:variables
 }
