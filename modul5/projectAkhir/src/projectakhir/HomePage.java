@@ -13,6 +13,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -29,14 +31,19 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
+    
+    
     public HomePage() {
         initComponents();
         createCards();
+        loadCardsFavorite();
+        loadCardsScrollHorizontalCategory();
+        loadCardsVerticalCategory();
         setFont();
         jPanelTop1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelLeft1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelCenter1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
-        jPanelProfileShape.putClientProperty( FlatClientProperties.STYLE, "arc: 100" );
+        jPanelLevel.putClientProperty( FlatClientProperties.STYLE, "arc: 100" );
         jPanelCreateRecipe1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelCreateRecipe2.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         colorPanel();
@@ -60,25 +67,106 @@ public class HomePage extends javax.swing.JFrame {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
 
-        for (int i = 1; i <= 20; i++) {
-            JPanel card = new JPanel();
+        try {
+            File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
+            Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
             
-            card.setBackground(Color.decode("#02613c")); // Variasi warna
+            File fontStyleR = new File("src/font/Poppins-Regular.ttf");
+            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+            
+            for (int i = 1; i <= 5; i++) {
+            // ini untuk card utama
+            JPanel card = new JPanel();
+            card.setBackground(Color.decode("#ffffff")); // Variasi warna
 //            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             card.setPreferredSize(new Dimension(809, 200));
             card.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+            card.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
             
-
-            // Menambahkan label ke dalam kartu
+            // ini untuk gambar
             JPanel pic = new JPanel();
             pic.setBackground(Color.red); // Variasi warna
-            pic.setPreferredSize(new Dimension(100, 100));
+            pic.setPreferredSize(new Dimension(180, 180));
+            pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
             
+            // ini untuk content
+            JPanel content = new JPanel();
+            content.setBackground(Color.white); // Variasi warna
+            content.setPreferredSize(new Dimension(600, 180));
+            content.setLayout(new GridLayout(0, 1));
             
-            JLabel label = new JLabel("Card " + i, SwingConstants.CENTER);
-            label.setFont(new Font("Arial", Font.BOLD, 16));
-            card.add(label);
+                // isi konten paling atas
+                JPanel contentBox1 = new JPanel();
+                contentBox1.setBackground(Color.white);
+                contentBox1.setPreferredSize(new Dimension(600, 20));
+                contentBox1.setLayout(new BoxLayout(contentBox1, BoxLayout.Y_AXIS));
+  
+                content.add(contentBox1);
+                
+                // isi conten paling bawah
+                JPanel contentBox2 = new JPanel();
+                contentBox2.setBackground(Color.white);
+                contentBox2.setPreferredSize(new Dimension(600, 20));
+                contentBox2.setLayout(new GridLayout(2, 1));
+                content.add(contentBox2);
+                
+                //isi conten bawah atas
+                JPanel isiContentBox2Top = new JPanel();
+                isiContentBox2Top.setBackground(Color.white);
+                contentBox2.add(isiContentBox2Top);
+                
+                // isi konten bawah bawah
+                JPanel isiContentBox2Bottom = new JPanel();
+                isiContentBox2Bottom.setBackground(Color.white);
+                isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+                contentBox2.add(isiContentBox2Bottom);
+                
+                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonDetail.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonFavorite.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                // nambahin 2 tombol
+                isiContentBox2Bottom.add(buttonFavorite);
+                isiContentBox2Bottom.add(buttonDetail);
+                
+                // ini untuk judul card
+                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                labelJudul.setFont(fontm24);
+                contentBox1.add(labelJudul);
+            
+                // ini untuk lokasi
+                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                labelLokasi.setFont(fontr14);
+                contentBox1.add(labelLokasi);
+                
+
+                // ini untuk lokasi
+                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                labelBahanUtama.setFont(fontr14);
+                contentBox1.add(labelBahanUtama);
+                
+           
             card.add(pic);
+            card.add(content);
 
             // Menambahkan kartu ke panel
             jPanelScrollRecom.add(card);
@@ -87,6 +175,309 @@ public class HomePage extends javax.swing.JFrame {
         // Refresh tampilan
         jPanelScrollRecom.revalidate();
         jPanelScrollRecom.repaint();
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    private void loadCardsFavorite() {
+        // Set layout manager pada panel jika belum diatur melalui editor GUI
+//        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
+
+        try {
+            File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
+            Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
+            
+            File fontStyleR = new File("src/font/Poppins-Regular.ttf");
+            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+            
+            for (int i = 1; i <= 5; i++) {
+            // ini untuk card utama
+            JPanel card = new JPanel();
+            card.setBackground(Color.decode("#ffffff")); // Variasi warna
+//            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            card.setPreferredSize(new Dimension(809, 200));
+            card.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+            card.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            // ini untuk gambar
+            JPanel pic = new JPanel();
+            pic.setBackground(Color.red); // Variasi warna
+            pic.setPreferredSize(new Dimension(180, 180));
+            pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            // ini untuk content
+            JPanel content = new JPanel();
+            content.setBackground(Color.white); // Variasi warna
+            content.setPreferredSize(new Dimension(600, 180));
+            content.setLayout(new GridLayout(0, 1));
+            
+                // isi konten paling atas
+                JPanel contentBox1 = new JPanel();
+                contentBox1.setBackground(Color.white);
+                contentBox1.setPreferredSize(new Dimension(600, 20));
+                contentBox1.setLayout(new BoxLayout(contentBox1, BoxLayout.Y_AXIS));
+  
+                content.add(contentBox1);
+                
+                // isi conten paling bawah
+                JPanel contentBox2 = new JPanel();
+                contentBox2.setBackground(Color.white);
+                contentBox2.setPreferredSize(new Dimension(600, 20));
+                contentBox2.setLayout(new GridLayout(2, 1));
+                content.add(contentBox2);
+                
+                //isi conten bawah atas
+                JPanel isiContentBox2Top = new JPanel();
+                isiContentBox2Top.setBackground(Color.white);
+                contentBox2.add(isiContentBox2Top);
+                
+                // isi konten bawah bawah
+                JPanel isiContentBox2Bottom = new JPanel();
+                isiContentBox2Bottom.setBackground(Color.white);
+                isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+                contentBox2.add(isiContentBox2Bottom);
+                
+                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonDetail.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonFavorite.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                // nambahin 2 tombol
+                isiContentBox2Bottom.add(buttonFavorite);
+                isiContentBox2Bottom.add(buttonDetail);
+                
+                // ini untuk judul card
+                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                labelJudul.setFont(fontm24);
+                contentBox1.add(labelJudul);
+            
+                // ini untuk lokasi
+                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                labelLokasi.setFont(fontr14);
+                contentBox1.add(labelLokasi);
+                
+
+                // ini untuk lokasi
+                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                labelBahanUtama.setFont(fontr14);
+                contentBox1.add(labelBahanUtama);
+                
+           
+            card.add(pic);
+            card.add(content);
+
+            // Menambahkan kartu ke panel
+            jPanelScrollFavorite.add(card);
+        }
+
+        // Refresh tampilan
+        jPanelScrollRecom.revalidate();
+        jPanelScrollRecom.repaint();
+        } catch (Exception e) {
+        }
+        
+    }
+    private void loadCardsVerticalCategory() {
+        // Set layout manager pada panel jika belum diatur melalui editor GUI
+//        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
+
+        try {
+            File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
+            Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
+            
+            File fontStyleR = new File("src/font/Poppins-Regular.ttf");
+            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+            
+            for (int i = 1; i <= 5; i++) {
+            // ini untuk card utama
+            JPanel card = new JPanel();
+            card.setBackground(Color.decode("#ffffff")); // Variasi warna
+//            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            card.setPreferredSize(new Dimension(809, 200));
+            card.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+            card.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            // ini untuk gambar
+            JPanel pic = new JPanel();
+            pic.setBackground(Color.red); // Variasi warna
+            pic.setPreferredSize(new Dimension(180, 180));
+            pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            // ini untuk content
+            JPanel content = new JPanel();
+            content.setBackground(Color.white); // Variasi warna
+            content.setPreferredSize(new Dimension(600, 180));
+            content.setLayout(new GridLayout(0, 1));
+            
+                // isi konten paling atas
+                JPanel contentBox1 = new JPanel();
+                contentBox1.setBackground(Color.white);
+                contentBox1.setPreferredSize(new Dimension(600, 20));
+                contentBox1.setLayout(new BoxLayout(contentBox1, BoxLayout.Y_AXIS));
+  
+                content.add(contentBox1);
+                
+                // isi conten paling bawah
+                JPanel contentBox2 = new JPanel();
+                contentBox2.setBackground(Color.white);
+                contentBox2.setPreferredSize(new Dimension(600, 20));
+                contentBox2.setLayout(new GridLayout(2, 1));
+                content.add(contentBox2);
+                
+                //isi conten bawah atas
+                JPanel isiContentBox2Top = new JPanel();
+                isiContentBox2Top.setBackground(Color.white);
+                contentBox2.add(isiContentBox2Top);
+                
+                // isi konten bawah bawah
+                JPanel isiContentBox2Bottom = new JPanel();
+                isiContentBox2Bottom.setBackground(Color.white);
+                isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+                contentBox2.add(isiContentBox2Bottom);
+                
+                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonDetail.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonFavorite.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                // nambahin 2 tombol
+                isiContentBox2Bottom.add(buttonFavorite);
+                isiContentBox2Bottom.add(buttonDetail);
+                
+                // ini untuk judul card
+                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                labelJudul.setFont(fontm24);
+                contentBox1.add(labelJudul);
+            
+                // ini untuk lokasi
+                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                labelLokasi.setFont(fontr14);
+                contentBox1.add(labelLokasi);
+                
+
+                // ini untuk lokasi
+                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                labelBahanUtama.setFont(fontr14);
+                contentBox1.add(labelBahanUtama);
+                
+           
+            card.add(pic);
+            card.add(content);
+
+            // Menambahkan kartu ke panel
+            jPanelScrollCategory1.add(card);
+        }
+
+        // Refresh tampilan
+        jPanelScrollCategory1.revalidate();
+        jPanelScrollCategory1.repaint();
+        } catch (Exception e) {
+        }
+        
+    }
+    private void loadCardsScrollHorizontalCategory() {
+        // Set layout manager pada panel jika belum diatur melalui editor GUI
+//        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
+
+        try {
+            File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
+            Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
+            
+            File fontStyleR = new File("src/font/Poppins-Regular.ttf");
+            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+            
+            for (int i = 1; i <= 20; i++) {
+            // ini untuk card utama
+//            JPanel card = new JPanel();
+//            card.setBackground(Color.decode("#02613c")); // Variasi warna
+////            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+//            card.setPreferredSize(new Dimension(107, 107));
+//            card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+            
+            
+            // ini untuk gambar
+//            JLabel pic = new JLabel("coba bang");
+//            pic.setPreferredSize(new Dimension(107, 107));
+            
+                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonCategory = new JButton("Detail : " + buttonValue);
+                buttonCategory.setBackground(Color.decode("#ffffff")); // Variasi warna
+                buttonCategory.setPreferredSize(new Dimension(100, 100)); // Variasi warna
+
+                // Menambahkan ActionListener untuk menangkap klik
+               buttonCategory.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button kategori: " + buttonValue);
+                    }
+                });
+                
+                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+
+                // Menambahkan ActionListener untuk menangkap klik
+                buttonFavorite.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Cetak nilai i saat tombol diklik
+                        System.out.println("Button clicked: " + buttonValue);
+                    }
+                });
+                
+                // nambahin 2 tombol
+               
+                
+           
+//            card.add(buttonCategory);
+       
+
+            // Menambahkan kartu ke panel
+            jPanelScrollCategory.add(buttonCategory);
+        }
+
+        // Refresh tampilan
+        jPanelScrollRecom.revalidate();
+        jPanelScrollRecom.repaint();
+        } catch (Exception e) {
+        }
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -103,17 +494,14 @@ public class HomePage extends javax.swing.JFrame {
         jPanelKategori = new javax.swing.JPanel();
         jLabelKatgori = new javax.swing.JLabel();
         jLabelKatgori1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
+        jScrollPaneCategory = new javax.swing.JScrollPane();
+        jPanelScrollCategory = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jPanelScrollCategory1 = new javax.swing.JPanel();
         jPanelAddRecipe = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jPanelScrollFavorite = new javax.swing.JPanel();
         jPanelFavorite = new javax.swing.JPanel();
         jPanelCreateRecipeP = new javax.swing.JPanel();
         jPanelCreateRecipe1 = new javax.swing.JPanel();
@@ -142,10 +530,12 @@ public class HomePage extends javax.swing.JFrame {
         jButtonCreateDeskripsi = new javax.swing.JButton();
         jPanelTop = new javax.swing.JPanel();
         jPanelTop1 = new javax.swing.JPanel();
-        jPanelProfileShape = new javax.swing.JPanel();
+        jPanelLevel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabelNamaUserHome = new javax.swing.JLabel();
         jLabelKata = new javax.swing.JLabel();
+        jPanelProfileShape = new javax.swing.JPanel();
+        jLabelLevel = new javax.swing.JLabel();
         jPanelLeft = new javax.swing.JPanel();
         jPanelLeft1 = new javax.swing.JPanel();
         jButtonRecom = new javax.swing.JButton();
@@ -169,7 +559,7 @@ public class HomePage extends javax.swing.JFrame {
         jButtonSearchRecom.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSearchRecom.setText("Cari");
 
-        jPanelScrollRecom.setBackground(new java.awt.Color(255, 0, 51));
+        jPanelScrollRecom.setBackground(new java.awt.Color(242, 242, 238));
         jPanelScrollRecom.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
         jScrollPane4.setViewportView(jPanelScrollRecom);
 
@@ -211,110 +601,6 @@ public class HomePage extends javax.swing.JFrame {
         jLabelKatgori1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelKatgori1.setText("Choose Your Coulinary");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -328,18 +614,15 @@ public class HomePage extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPaneCategory.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
+        jPanelScrollCategory.setBackground(new java.awt.Color(242, 242, 238));
+        jPanelScrollCategory.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
+        jScrollPaneCategory.setViewportView(jPanelScrollCategory);
+
+        jPanelScrollCategory1.setBackground(new java.awt.Color(242, 242, 238));
+        jPanelScrollCategory1.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+        jScrollPane7.setViewportView(jPanelScrollCategory1);
 
         javax.swing.GroupLayout jPanelKategoriLayout = new javax.swing.GroupLayout(jPanelKategori);
         jPanelKategori.setLayout(jPanelKategoriLayout);
@@ -347,28 +630,15 @@ public class HomePage extends javax.swing.JFrame {
             jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelKategoriLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelKatgori1)
                     .addComponent(jLabelKatgori, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelKategoriLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPaneCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelKategoriLayout.setVerticalGroup(
@@ -376,37 +646,37 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanelKategoriLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelKatgori, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelKategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPaneCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelKatgori1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanelCenter1.add(jPanelKategori, "cardKategori");
 
         jPanelAddRecipe.setBackground(new java.awt.Color(242, 242, 238));
 
+        jPanelScrollFavorite.setBackground(new java.awt.Color(242, 242, 238));
+        jPanelScrollFavorite.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+        jScrollPane5.setViewportView(jPanelScrollFavorite);
+
         javax.swing.GroupLayout jPanelAddRecipeLayout = new javax.swing.GroupLayout(jPanelAddRecipe);
         jPanelAddRecipe.setLayout(jPanelAddRecipeLayout);
         jPanelAddRecipeLayout.setHorizontalGroup(
             jPanelAddRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddRecipeLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane5)
+                .addContainerGap())
         );
         jPanelAddRecipeLayout.setVerticalGroup(
             jPanelAddRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         );
 
         jPanelCenter1.add(jPanelAddRecipe, "cardAddRecipe");
@@ -466,14 +736,6 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
-                        .addComponent(jLabelLangkah, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateRecipe1Layout.createSequentialGroup()
-                        .addComponent(jLabelNamaKuliner, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(433, 433, 433)
-                        .addComponent(jLabelTotalHargaBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateRecipe1Layout.createSequentialGroup()
                         .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCreateRecipe1Layout.createSequentialGroup()
@@ -494,7 +756,15 @@ public class HomePage extends javax.swing.JFrame {
                             .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(45, 45, 45))))
+                        .addGap(45, 45, 45))
+                    .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
+                        .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelLangkah, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
+                                .addComponent(jLabelNamaKuliner, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(433, 433, 433)
+                                .addComponent(jLabelTotalHargaBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelCreateRecipe1Layout.setVerticalGroup(
             jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,6 +923,30 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanelTop1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanelLevel.setBackground(new java.awt.Color(2, 97, 60));
+        jPanelLevel.setPreferredSize(new java.awt.Dimension(54, 54));
+
+        javax.swing.GroupLayout jPanelLevelLayout = new javax.swing.GroupLayout(jPanelLevel);
+        jPanelLevel.setLayout(jPanelLevelLayout);
+        jPanelLevelLayout.setHorizontalGroup(
+            jPanelLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelLevelLayout.setVerticalGroup(
+            jPanelLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
+
+        jLabelNamaUserHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelNamaUserHome.setText("ini Nama");
+        jPanel1.add(jLabelNamaUserHome);
+
+        jLabelKata.setText("cobaaaa");
+        jPanel1.add(jLabelKata);
+
         jPanelProfileShape.setBackground(new java.awt.Color(2, 97, 60));
         jPanelProfileShape.setPreferredSize(new java.awt.Dimension(54, 54));
 
@@ -667,15 +961,8 @@ public class HomePage extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
-
-        jLabelNamaUserHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelNamaUserHome.setText("ini Nama");
-        jPanel1.add(jLabelNamaUserHome);
-
-        jLabelKata.setText("cobaaaa");
-        jPanel1.add(jLabelKata);
+        jLabelLevel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLevel.setText("lvl 5");
 
         javax.swing.GroupLayout jPanelTop1Layout = new javax.swing.GroupLayout(jPanelTop1);
         jPanelTop1.setLayout(jPanelTop1Layout);
@@ -686,16 +973,25 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jPanelProfileShape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE)
+                .addGroup(jPanelTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jLabelLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         jPanelTop1Layout.setVerticalGroup(
             jPanelTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTop1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanelTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelProfileShape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(jPanelTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTop1Layout.createSequentialGroup()
+                        .addComponent(jPanelLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelLevel))
+                    .addGroup(jPanelTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                        .addComponent(jPanelProfileShape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
@@ -955,6 +1251,7 @@ public class HomePage extends javax.swing.JFrame {
 //            UIManager.put( "TextComponent.arc", 10 );
             UIManager.put( "Button.arc", 10 );
             UIManager.put( "TextComponent.arc", 10 );
+            UIManager.put( "ScrollBar.width", 5 );
 //            UIManager.put("Button.border", BorderFactory.createLineBorder(Color.RED));
   
 
@@ -989,21 +1286,13 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelKatgori;
     private javax.swing.JLabel jLabelKatgori1;
     private javax.swing.JLabel jLabelLangkah;
+    private javax.swing.JLabel jLabelLevel;
     private javax.swing.JLabel jLabelNamaKuliner;
     private javax.swing.JLabel jLabelNamaUserHome;
     private javax.swing.JLabel jLabelSejarah;
     private javax.swing.JLabel jLabelTotalHargaBahan;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelAddRecipe;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelCenter1;
@@ -1014,8 +1303,12 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelKategori;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelLeft1;
+    private javax.swing.JPanel jPanelLevel;
     private javax.swing.JPanel jPanelProfileShape;
     private javax.swing.JPanel jPanelRecom;
+    private javax.swing.JPanel jPanelScrollCategory;
+    private javax.swing.JPanel jPanelScrollCategory1;
+    private javax.swing.JPanel jPanelScrollFavorite;
     private javax.swing.JPanel jPanelScrollRecom;
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JPanel jPanelTop1;
@@ -1023,6 +1316,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPaneCategory;
     private javax.swing.JTextArea jTextAreaDeskripsi1;
     private javax.swing.JTextArea jTextAreaLangkah;
     private javax.swing.JTextArea jTextAreajLabelSejarah;

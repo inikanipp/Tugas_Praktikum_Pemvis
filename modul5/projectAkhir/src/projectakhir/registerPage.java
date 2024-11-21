@@ -9,7 +9,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
-import javax.swing.BorderFactory;
 import javax.swing.UIManager;
 
 /**
@@ -24,6 +23,9 @@ public class registerPage extends javax.swing.JFrame {
         jPanelYellowHomePage.setBackground(Color.decode("#e99d28"));
         jPanelYellowHomePage.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
 //        jButtonRegisterUser.setBorder(BorderFactory.createLineBorder(Color.decode("#02613c"), 2));
+        jPanelRed.setVisible(true);
+        jPanelYellow.setVisible(false);
+        jPanelGreen.setVisible(false);
         
         try{
             File fontStyle = new File("src/font/Poppins-Regular.ttf");
@@ -48,7 +50,6 @@ public class registerPage extends javax.swing.JFrame {
             
         }catch(Exception e){
             e.printStackTrace();
-            
         }
     }
 
@@ -70,6 +71,10 @@ public class registerPage extends javax.swing.JFrame {
         jPasswordFieldUserRegister = new javax.swing.JPasswordField();
         jLabelLoginPage = new javax.swing.JLabel();
         jLabelLoginPage1 = new javax.swing.JLabel();
+        jPanelSafePass = new javax.swing.JPanel();
+        jPanelRed = new javax.swing.JPanel();
+        jPanelYellow = new javax.swing.JPanel();
+        jPanelGreen = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanelYellowHomePage = new javax.swing.JPanel();
 
@@ -101,11 +106,65 @@ public class registerPage extends javax.swing.JFrame {
 
         jLabelPasswordUserRegister.setText("password");
 
+        jPasswordFieldUserRegister.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordFieldUserRegisterKeyTyped(evt);
+            }
+        });
+
         jLabelLoginPage.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelLoginPage.setText("Dude!");
 
         jLabelLoginPage1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelLoginPage1.setText("Welcome Back");
+
+        jPanelSafePass.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelSafePass.setLayout(new java.awt.GridLayout());
+
+        jPanelRed.setBackground(new java.awt.Color(255, 0, 51));
+
+        javax.swing.GroupLayout jPanelRedLayout = new javax.swing.GroupLayout(jPanelRed);
+        jPanelRed.setLayout(jPanelRedLayout);
+        jPanelRedLayout.setHorizontalGroup(
+            jPanelRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanelRedLayout.setVerticalGroup(
+            jPanelRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        jPanelSafePass.add(jPanelRed);
+
+        jPanelYellow.setBackground(new java.awt.Color(255, 255, 0));
+
+        javax.swing.GroupLayout jPanelYellowLayout = new javax.swing.GroupLayout(jPanelYellow);
+        jPanelYellow.setLayout(jPanelYellowLayout);
+        jPanelYellowLayout.setHorizontalGroup(
+            jPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanelYellowLayout.setVerticalGroup(
+            jPanelYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        jPanelSafePass.add(jPanelYellow);
+
+        jPanelGreen.setBackground(new java.awt.Color(102, 255, 0));
+
+        javax.swing.GroupLayout jPanelGreenLayout = new javax.swing.GroupLayout(jPanelGreen);
+        jPanelGreen.setLayout(jPanelGreenLayout);
+        jPanelGreenLayout.setHorizontalGroup(
+            jPanelGreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+        jPanelGreenLayout.setVerticalGroup(
+            jPanelGreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        jPanelSafePass.add(jPanelGreen);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,17 +173,18 @@ public class registerPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelSafePass, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLoginPage)
                     .addComponent(jLabelPasswordUserRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelUsernameUserRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLoginPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextFieldUsernameUserRegister, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPasswordFieldUserRegister, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButtonUserRegisterYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButtonUserLoginYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextFieldUsernameUserRegister, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                        .addComponent(jPasswordFieldUserRegister, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonUserRegisterYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonUserLoginYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,11 +202,13 @@ public class registerPage extends javax.swing.JFrame {
                 .addComponent(jLabelPasswordUserRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldUserRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonUserLoginYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonUserRegisterYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelSafePass, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUserRegisterYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUserLoginYellow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -198,6 +260,29 @@ public class registerPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUserRegisterYellowActionPerformed
 
+    private void jPasswordFieldUserRegisterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldUserRegisterKeyTyped
+        // TODO add your handling code here:
+        char[] password = jPasswordFieldUserRegister.getPassword();
+        int length = password.length;
+        System.out.println("panjang : " + length);
+        
+        if(length < 5){
+            jPanelRed.setVisible(true);
+            jPanelYellow.setVisible(false);
+            jPanelGreen.setVisible(false);
+        }
+        else if(length < 8){
+            jPanelRed.setVisible(true);
+            jPanelYellow.setVisible(true);
+            jPanelGreen.setVisible(false);
+        }
+        else {
+            jPanelRed.setVisible(true);
+            jPanelYellow.setVisible(true);
+            jPanelGreen.setVisible(true);
+        }
+    }//GEN-LAST:event_jPasswordFieldUserRegisterKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -234,6 +319,10 @@ public class registerPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsernameUserRegister;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelGreen;
+    private javax.swing.JPanel jPanelRed;
+    private javax.swing.JPanel jPanelSafePass;
+    private javax.swing.JPanel jPanelYellow;
     private javax.swing.JPanel jPanelYellowHomePage;
     private javax.swing.JPasswordField jPasswordFieldUserRegister;
     private javax.swing.JTextField jTextFieldUsernameUserRegister;

@@ -42,19 +42,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanelSafePass" min="-2" pref="130" max="-2" attributes="0"/>
                       <Component id="jLabelLoginPage" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelPasswordUserRegister" min="-2" pref="114" max="-2" attributes="0"/>
-                      <Component id="jLabelUsernameUserRegister" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="jLabelPasswordUserLogin" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="jLabelUsernameUserLogin" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                       <Component id="jLabelLoginPage1" alignment="0" min="-2" pref="313" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jTextFieldUsernameUserRegister" alignment="0" pref="278" max="32767" attributes="0"/>
-                          <Component id="jPasswordFieldUserRegister" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButtonUserRegisterYellow" min="-2" pref="130" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButtonUserLoginYellow" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="jTextFieldUsernameUserLogin" alignment="0" pref="278" max="32767" attributes="0"/>
+                          <Component id="jPasswordFieldUserLogin" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButtonUserLoginGreen" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="115" max="32767" attributes="0"/>
@@ -69,74 +64,55 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelLoginPage" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jLabelUsernameUserRegister" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="jLabelUsernameUserLogin" min="-2" pref="26" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextFieldUsernameUserRegister" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jTextFieldUsernameUserLogin" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabelPasswordUserRegister" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="jLabelPasswordUserLogin" min="-2" pref="26" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPasswordFieldUserRegister" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanelSafePass" min="-2" pref="5" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonUserRegisterYellow" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButtonUserLoginYellow" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="251" max="32767" attributes="0"/>
+                  <Component id="jPasswordFieldUserLogin" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="jButtonUserLoginGreen" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="237" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextFieldUsernameUserRegister">
+        <Component class="javax.swing.JTextField" name="jTextFieldUsernameUserLogin">
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonUserRegisterYellow">
+        <Component class="javax.swing.JButton" name="jButtonUserLoginGreen">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="28" green="9d" red="e9" type="rgb"/>
+              <Color blue="3c" green="61" red="2" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Register"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUserRegisterYellowActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonUserLoginYellow">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="28" green="9d" red="e9" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUserLoginYellowActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUserLoginGreenActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelUsernameUserRegister">
+        <Component class="javax.swing.JLabel" name="jLabelUsernameUserLogin">
           <Properties>
             <Property name="text" type="java.lang.String" value="username"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelPasswordUserRegister">
+        <Component class="javax.swing.JLabel" name="jLabelPasswordUserLogin">
           <Properties>
             <Property name="text" type="java.lang.String" value="password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordFieldUserRegister">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPasswordFieldUserRegisterKeyTyped"/>
-          </Events>
+        <Component class="javax.swing.JPasswordField" name="jPasswordFieldUserLogin">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelLoginPage">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="36" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Dude!"/>
+            <Property name="text" type="java.lang.String" value="Atmin"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelLoginPage1">
@@ -147,80 +123,6 @@
             <Property name="text" type="java.lang.String" value="Welcome Back"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanelSafePass">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="0"/>
-            <Property name="rows" type="int" value="1"/>
-          </Layout>
-          <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanelRed">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="0" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanelYellow">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanelGreen">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="ff" red="66" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
-          </SubComponents>
-        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -235,7 +137,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanelYellowHomePage" max="32767" attributes="0"/>
+                  <Component id="jPanelGreenHomePage" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -244,17 +146,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanelYellowHomePage" max="32767" attributes="0"/>
+                  <Component id="jPanelGreenHomePage" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanelYellowHomePage">
+        <Container class="javax.swing.JPanel" name="jPanelGreenHomePage">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="28" green="9d" red="e9" type="rgb"/>
+              <Color blue="3c" green="61" red="2" type="rgb"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[432, 604]"/>
