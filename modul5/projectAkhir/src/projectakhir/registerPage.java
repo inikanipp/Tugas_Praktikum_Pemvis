@@ -119,7 +119,7 @@ public class registerPage extends javax.swing.JFrame {
         jLabelLoginPage1.setText("Welcome Back");
 
         jPanelSafePass.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelSafePass.setLayout(new java.awt.GridLayout());
+        jPanelSafePass.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanelRed.setBackground(new java.awt.Color(255, 0, 51));
 
@@ -136,7 +136,7 @@ public class registerPage extends javax.swing.JFrame {
 
         jPanelSafePass.add(jPanelRed);
 
-        jPanelYellow.setBackground(new java.awt.Color(255, 255, 0));
+        jPanelYellow.setBackground(new java.awt.Color(255, 204, 0));
 
         javax.swing.GroupLayout jPanelYellowLayout = new javax.swing.GroupLayout(jPanelYellow);
         jPanelYellow.setLayout(jPanelYellowLayout);

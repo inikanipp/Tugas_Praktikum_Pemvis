@@ -16,11 +16,17 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.PreparedStatement;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -28,13 +34,30 @@ import javax.swing.UIManager;
  */
 public class HomePage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomePage
-     */
+    private static String UsernameHome;
+    private static int idUser, levelUser;
     
+    File selectedFile;
+    
+    
+    
+    public static void setUsernameHome(String username){
+        UsernameHome = username;
+        System.out.println("nama adalah 1 : " + UsernameHome);
+    }
+    
+    public static void setidUser(int id){
+        idUser = id;
+    }
+    
+    public static void setlevelUser(int level){
+        levelUser = level;
+    }
     
     public HomePage() {
         initComponents();
+        System.out.println("nama adalah 2 : " + UsernameHome);
+        startHome();
         createCards();
         loadCardsFavorite();
         loadCardsScrollHorizontalCategory();
@@ -43,7 +66,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanelTop1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelLeft1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelCenter1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
-        jPanelLevel.putClientProperty( FlatClientProperties.STYLE, "arc: 100" );
+        jPanelProfileShape.putClientProperty( FlatClientProperties.STYLE, "arc: 100" );
         jPanelCreateRecipe1.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         jPanelCreateRecipe2.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
         colorPanel();
@@ -63,6 +86,14 @@ public class HomePage extends javax.swing.JFrame {
      */
     
     
+    private void startHome(){
+        jLabelNamaUserHome.setText(UsernameHome);
+        jLabelKata.setText("Yukk pilih kulinermu " + UsernameHome);
+        jLabelLevel.setText("Lvl " + levelUser);
+        System.out.println("nama adalah : " + UsernameHome);
+    }
+    
+    
     private void createCards() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
@@ -73,8 +104,15 @@ public class HomePage extends javax.swing.JFrame {
             
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
             Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+
+            String sql = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+            String sql1 = "SELECT * FROM makanan";
             
-            for (int i = 1; i <= 5; i++) {
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            
+            while (res.next()){
             // ini untuk card utama
             JPanel card = new JPanel();
             card.setBackground(Color.decode("#ffffff")); // Variasi warna
@@ -87,7 +125,24 @@ public class HomePage extends javax.swing.JFrame {
             JPanel pic = new JPanel();
             pic.setBackground(Color.red); // Variasi warna
             pic.setPreferredSize(new Dimension(180, 180));
+            pic.setLayout(new BoxLayout(pic, BoxLayout.Y_AXIS));
             pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            JLabel labelGambar = new JLabel();
+            labelGambar.setFont(new Font("Arial", Font.BOLD, 16));
+            
+             // Ambil gambar sebagai byte[]
+            byte[] imgBytes = res.getBytes("gambar");
+
+            // Konversi byte[] ke ImageIcon
+            ImageIcon icon = new ImageIcon(imgBytes);
+
+            // Ubah ukuran gambar (misal: 200x200)
+            Image scaledImage = icon.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+            labelGambar.setIcon(new ImageIcon(scaledImage));
+            
+            pic.add(labelGambar);
+            
             
             // ini untuk content
             JPanel content = new JPanel();
@@ -121,7 +176,7 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
                 contentBox2.add(isiContentBox2Bottom);
                 
-                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
+                int buttonValue = 5; // Salinan nilai i untuk digunakan dalam listener
                 JButton buttonDetail = new JButton("Detail : " + buttonValue);
 
                 // Menambahkan ActionListener untuk menangkap klik
@@ -149,18 +204,17 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.add(buttonDetail);
                 
                 // ini untuk judul card
-                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                JLabel labelJudul = new JLabel(res.getString("nama_makanan") , SwingConstants.LEFT);
                 labelJudul.setFont(fontm24);
                 contentBox1.add(labelJudul);
             
                 // ini untuk lokasi
-                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                JLabel labelLokasi = new JLabel(res.getString("nama_wilayah"), SwingConstants.LEFT);
                 labelLokasi.setFont(fontr14);
                 contentBox1.add(labelLokasi);
                 
-
                 // ini untuk lokasi
-                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                JLabel labelBahanUtama = new JLabel(res.getString("bahan_utama"), SwingConstants.LEFT);
                 labelBahanUtama.setFont(fontr14);
                 contentBox1.add(labelBahanUtama);
                 
@@ -421,54 +475,40 @@ public class HomePage extends javax.swing.JFrame {
             Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
             
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
-            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
+            Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(10f);
             
-            for (int i = 1; i <= 20; i++) {
-            // ini untuk card utama
-//            JPanel card = new JPanel();
-//            card.setBackground(Color.decode("#02613c")); // Variasi warna
-////            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-//            card.setPreferredSize(new Dimension(107, 107));
-//            card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+            String sql = "SELECT * FROM wilayah";
             
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
             
-            // ini untuk gambar
-//            JLabel pic = new JLabel("coba bang");
-//            pic.setPreferredSize(new Dimension(107, 107));
-            
-                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
-                JButton buttonCategory = new JButton("Detail : " + buttonValue);
+
+            ArrayList<JButton> buttonList = new ArrayList<>();
+             while (res.next()) {
+
+                JButton buttonCategory = new JButton(res.getString("wilayah"));
                 buttonCategory.setBackground(Color.decode("#ffffff")); // Variasi warna
                 buttonCategory.setPreferredSize(new Dimension(100, 100)); // Variasi warna
+                buttonCategory.setFont(fontr14);
+                buttonList.add(buttonCategory);
 
                 // Menambahkan ActionListener untuk menangkap klik
                buttonCategory.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button kategori: " + buttonValue);
+                        
+                        for (JButton btn : buttonList) {
+                            btn.setBackground(Color.decode("#ffffff"));;
+                            btn.setForeground(Color.decode("#000000"));// Menampilkan teks tombol
+                        }
+                        buttonCategory.setBackground(Color.decode("#02613C"));
+                        buttonCategory.setForeground(Color.decode("#ffffff"));
+                        System.out.println("Button kategori: ");
                     }
                 });
-                
-                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
 
-                // Menambahkan ActionListener untuk menangkap klik
-                buttonFavorite.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
-                    }
-                });
-                
-                // nambahin 2 tombol
-               
-                
-           
-//            card.add(buttonCategory);
-       
-
-            // Menambahkan kartu ke panel
             jPanelScrollCategory.add(buttonCategory);
         }
 
@@ -517,6 +557,8 @@ public class HomePage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaLangkah = new javax.swing.JTextArea();
         jButtonNext = new javax.swing.JButton();
+        jLabelBahanUtama1 = new javax.swing.JLabel();
+        jButtonPilihFoto = new javax.swing.JButton();
         jPanelCreateRecipe2 = new javax.swing.JPanel();
         jLabelSejarah = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -729,6 +771,16 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        jLabelBahanUtama1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelBahanUtama1.setText("Foto");
+
+        jButtonPilihFoto.setText("Pilih Foto");
+        jButtonPilihFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPilihFotoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCreateRecipe1Layout = new javax.swing.GroupLayout(jPanelCreateRecipe1);
         jPanelCreateRecipe1.setLayout(jPanelCreateRecipe1Layout);
         jPanelCreateRecipe1Layout.setHorizontalGroup(
@@ -745,13 +797,17 @@ public class HomePage extends javax.swing.JFrame {
                             .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
                                 .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jTextFieldBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonPilihFoto)
+                                    .addComponent(jLabelBahanUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
                                 .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBoxAsal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
                                         .addComponent(jLabelAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGap(0, 153, Short.MAX_VALUE))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelCreateRecipe1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -780,18 +836,20 @@ public class HomePage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBahanUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPilihFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addGap(16, 16, 16)
                 .addComponent(jLabelLangkah, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
 
         jPanelCreateRecipeP.add(jPanelCreateRecipe1, "cardRecipe");
@@ -815,6 +873,11 @@ public class HomePage extends javax.swing.JFrame {
         jButtonSubmit.setBackground(new java.awt.Color(2, 97, 60));
         jButtonSubmit.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSubmit.setText("Submit");
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCreateRecipe2Layout = new javax.swing.GroupLayout(jPanelCreateRecipe2);
         jPanelCreateRecipe2.setLayout(jPanelCreateRecipe2Layout);
@@ -1105,7 +1168,6 @@ public class HomePage extends javax.swing.JFrame {
             Font fontRegular12 = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(12f);
             Font font1 = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(24f);
             
-            
             jLabelCreateYourRecipe.setFont(fontm18);
             jLabelCreateYourRecipe.setForeground(Color.decode("#9eaea2"));
             jButtonCreateRecipe.setFont(fontm12);
@@ -1237,6 +1299,63 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTotalHargaBahanActionPerformed
 
+    private void jButtonPilihFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPilihFotoActionPerformed
+        // TODO add your handling code here:
+        pilihFoto();
+        
+    }//GEN-LAST:event_jButtonPilihFotoActionPerformed
+
+    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        // TODO add your handling code here:
+        simpanData();
+    }//GEN-LAST:event_jButtonSubmitActionPerformed
+    
+    private void pilihFoto() {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(this);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile();
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
+                    .getImage().getScaledInstance(200, 150, java.awt.Image.SCALE_SMOOTH));
+
+        }
+    }
+    
+    
+
+     private void simpanData() {
+
+    if (selectedFile == null) {
+        JOptionPane.showMessageDialog(this, "Pilih foto terlebih dahulu!");
+        return;
+    }
+
+    try {
+        String sql = "INSERT INTO makanan (nama_makanan, bahan_utama, total_harga_bahan, langkah_langkah, deskripsi, sejarah, gambar, id_wilayah, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, jTextFieldNamaKuliner.getText());
+                pst.setString(2, jTextFieldBahanUtama.getText());
+                pst.setInt(3, Integer.parseInt(jTextFieldTotalHargaBahan.getText()));
+                pst.setString(4, jTextAreaLangkah.getText());
+                pst.setString(5, jTextAreaDeskripsi1.getText());
+                pst.setString(6, jTextAreajLabelSejarah.getText());
+                // Membaca file foto sebagai byte array
+                FileInputStream fis = new FileInputStream(selectedFile);
+                pst.setBinaryStream(7, fis, (int) selectedFile.length());
+                
+                pst.setInt(8,5);
+                pst.setString(9, "unavailable");
+                
+                pst.execute();
+                JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
+                
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+}
+
     /**
      * @param args the command line arguments
      */
@@ -1274,12 +1393,14 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCreateRecipe;
     private javax.swing.JButton jButtonFavorite;
     private javax.swing.JButton jButtonNext;
+    private javax.swing.JButton jButtonPilihFoto;
     private javax.swing.JButton jButtonRecom;
     private javax.swing.JButton jButtonSearchRecom;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JComboBox<String> jComboBoxAsal;
     private javax.swing.JLabel jLabelAsal;
     private javax.swing.JLabel jLabelBahanUtama;
+    private javax.swing.JLabel jLabelBahanUtama1;
     private javax.swing.JLabel jLabelCreateYourRecipe;
     private javax.swing.JLabel jLabelDeskripsi1;
     private javax.swing.JLabel jLabelKata;

@@ -9,8 +9,8 @@ package projectakhir;
  * @author Admin
  */
 public class username {
-    private String username, password;
-    private int level;
+    private static String username, password;
+    private static int level;
     
     
     protected String getUsername(){

@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.UIManager;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
+import projectakhir.username;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class loginPage extends javax.swing.JFrame {
 
-
+   
     public loginPage() {
         initComponents();
         jPanelGreenHomePage.setBackground(Color.decode("#02613c"));
@@ -78,14 +79,13 @@ public class loginPage extends javax.swing.JFrame {
                             
 }               
                 if(foundAccount){
+                    HomePage.setUsernameHome(username);
+                    HomePage.setlevelUser(level);
                     HomePage home = new HomePage();
-                    
-                    username user =  new username();
-                    user.setLevel(level);
-                    user.setUsername(username);
-                    
                     home.setVisible(true);
                     dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this, "anda belum login", "warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
             
@@ -212,7 +212,7 @@ public class loginPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelGreenHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addComponent(jPanelGreenHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -231,6 +231,10 @@ public class loginPage extends javax.swing.JFrame {
 
     private void jButtonUserRegisterGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUserRegisterGreenActionPerformed
         // TODO add your handling code here:
+        registerPage registerUser = new registerPage();
+        registerUser.setVisible(true);
+                    dispose();
+        
     }//GEN-LAST:event_jButtonUserRegisterGreenActionPerformed
 
     private void jButtonUserLoginGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUserLoginGreenActionPerformed
@@ -256,6 +260,8 @@ public class loginPage extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         //</editor-fold>
+        
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -276,6 +282,6 @@ public class loginPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelGreenHomePage;
     private javax.swing.JPasswordField jPasswordFieldUserLogin;
-    private javax.swing.JTextField jTextFieldUsernameUserLogin;
+    public javax.swing.JTextField jTextFieldUsernameUserLogin;
     // End of variables declaration//GEN-END:variables
 }
