@@ -32,10 +32,14 @@ import javax.swing.JFileChooser;
  *
  * @author ACER
  */
-public class HomePage extends javax.swing.JFrame {
 
+public class HomePage extends javax.swing.JFrame {
+    private CardLayout cardLayout;
     private static String UsernameHome;
     private static int idUser, levelUser;
+    private static boolean Data = false;
+    private String Category = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+    private String Search = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
     
     File selectedFile;
     
@@ -48,6 +52,7 @@ public class HomePage extends javax.swing.JFrame {
     
     public static void setidUser(int id){
         idUser = id;
+        System.out.println("ini adalah id user : " + idUser);
     }
     
     public static void setlevelUser(int level){
@@ -58,6 +63,7 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         System.out.println("nama adalah 2 : " + UsernameHome);
         startHome();
+        load_comboBoxKaryawanProyek();
         createCards();
         loadCardsFavorite();
         loadCardsScrollHorizontalCategory();
@@ -78,6 +84,9 @@ public class HomePage extends javax.swing.JFrame {
         }
         
     }
+    public void showPanel(String panelName) {
+        jPanelCenter1.show(cardPanel, panelName);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,10 +103,14 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     
+    
+    
+    
+    
     private void createCards() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
-
+        Data = false;
         try {
             jPanelScrollRecom.removeAll();
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
@@ -111,10 +124,12 @@ public class HomePage extends javax.swing.JFrame {
             
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res = stm.executeQuery(sql);
+            java.sql.ResultSet res = stm.executeQuery(Search);
             
             while (res.next()){
             // ini untuk card utama
+            Data = true;
+            
             JPanel card = new JPanel();
             card.setBackground(Color.decode("#ffffff")); // Variasi warna
 //            card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -235,11 +250,38 @@ public class HomePage extends javax.swing.JFrame {
         
     }
     
+    public int getIdWilayah(String w){
+        int idWilayah = 0;
+        try {
+            String sql = "SELECT id_wilayah FROM wilayah WHERE wilayah = ?";
+            Connection conn = koneksi.getKoneksi(); // Pastikan metode koneksi.getKoneksi() mengembalikan objek Connection yang valid
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, w);
+
+            java.sql.ResultSet res = ps.executeQuery();
+            if (res.next()) { // Periksa apakah ada hasil
+                idWilayah = res.getInt("id_wilayah"); // Ambil nilai kolom 'id_wilayah'
+            } 
+            
+        } catch (Exception e) {
+            return 0;
+        } 
+        return idWilayah;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     private void loadCardsFavorite() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
 
         try {
+            
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
             Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
             
@@ -249,7 +291,7 @@ public class HomePage extends javax.swing.JFrame {
             String sql = "SELECT makanan.nama_makanan, wilayah.wilayah, makanan.bahan_utama, makanan.gambar FROM favorite JOIN makanan ON favorite.id_makanan = makanan.id_makanan JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah WHERE favorite.id_user = ?;";
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, 3);
+            ps.setInt(1, idUser);
   
             java.sql.ResultSet res = ps.executeQuery();;
             
@@ -377,6 +419,9 @@ public class HomePage extends javax.swing.JFrame {
     private void loadCardsVerticalCategory() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
+        
+        jPanelScrollCategory1.removeAll();
+       
 
         try {
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
@@ -385,7 +430,17 @@ public class HomePage extends javax.swing.JFrame {
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
             Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
             
-            for (int i = 1; i <= 5; i++) {
+            String sql = "SELECT makanan.id_makanan, makanan.gambar, Makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+            String sql3 = "SELECT Makanan.nama_makanan ,Makanan.gambar, Wilayah.wilayah AS nama_wilayah, Makanan.bahan_utama FROM  Makanan JOIN  Wilayah ON Makanan.id_wilayah = Wilayah.id_wilayah WHERE Wilayah.wilayah = 'Jawa Timur';";
+            String sql2 = Category;
+            
+            
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql2);
+            
+            
+            while (res.next()){
             // ini untuk card utama
             JPanel card = new JPanel();
             card.setBackground(Color.decode("#ffffff")); // Variasi warna
@@ -398,7 +453,24 @@ public class HomePage extends javax.swing.JFrame {
             JPanel pic = new JPanel();
             pic.setBackground(Color.red); // Variasi warna
             pic.setPreferredSize(new Dimension(180, 180));
+            pic.setLayout(new BoxLayout(pic, BoxLayout.Y_AXIS));
             pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            
+            JLabel labelGambar = new JLabel();
+            labelGambar.setFont(new Font("Arial", Font.BOLD, 16));
+            
+             // Ambil gambar sebagai byte[]
+            byte[] imgBytes = res.getBytes("gambar");
+
+            // Konversi byte[] ke ImageIcon
+            ImageIcon icon = new ImageIcon(imgBytes);
+
+            // Ubah ukuran gambar (misal: 200x200)
+            Image scaledImage = icon.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+            labelGambar.setIcon(new ImageIcon(scaledImage));
+            
+            pic.add(labelGambar);
+            
             
             // ini untuk content
             JPanel content = new JPanel();
@@ -431,16 +503,19 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.setBackground(Color.white);
                 isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
                 contentBox2.add(isiContentBox2Bottom);
-                
-                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
-                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+                int IdMakanan = res.getInt("id_makanan");
+                int buttonValue = 5; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonDetail = new JButton("Detail");
 
                 // Menambahkan ActionListener untuk menangkap klik
                 buttonDetail.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
+                        iniDetail.setUsernameHome(IdMakanan);
+                        iniDetail detail = new iniDetail();
+                        detail.setVisible(true);
+                        dispose();
                     }
                 });
                 
@@ -460,18 +535,17 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.add(buttonDetail);
                 
                 // ini untuk judul card
-                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                JLabel labelJudul = new JLabel(res.getString("nama_makanan") , SwingConstants.LEFT);
                 labelJudul.setFont(fontm24);
                 contentBox1.add(labelJudul);
             
                 // ini untuk lokasi
-                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                JLabel labelLokasi = new JLabel(res.getString("nama_wilayah"), SwingConstants.LEFT);
                 labelLokasi.setFont(fontr14);
                 contentBox1.add(labelLokasi);
                 
-
                 // ini untuk lokasi
-                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                JLabel labelBahanUtama = new JLabel(res.getString("bahan_utama"), SwingConstants.LEFT);
                 labelBahanUtama.setFont(fontr14);
                 contentBox1.add(labelBahanUtama);
                 
@@ -487,13 +561,14 @@ public class HomePage extends javax.swing.JFrame {
         jPanelScrollCategory1.revalidate();
         jPanelScrollCategory1.repaint();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
         
     }
     private void loadCardsScrollHorizontalCategory() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
-
+        jPanelScrollCategory.removeAll();
         try {
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
             Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
@@ -516,20 +591,24 @@ public class HomePage extends javax.swing.JFrame {
                 buttonCategory.setPreferredSize(new Dimension(100, 100)); // Variasi warna
                 buttonCategory.setFont(fontr14);
                 buttonList.add(buttonCategory);
-
+                String namaWilayah = res.getString("wilayah");
                 // Menambahkan ActionListener untuk menangkap klik
                buttonCategory.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Cetak nilai i saat tombol diklik
+                        // Cetak nilai i saat tombol 
+                        Category = "SELECT Makanan.nama_makanan ,Makanan.gambar, Wilayah.wilayah AS nama_wilayah, Makanan.bahan_utama FROM  Makanan JOIN  Wilayah ON Makanan.id_wilayah = Wilayah.id_wilayah WHERE Wilayah.wilayah = '"+namaWilayah+"';";
                         
                         for (JButton btn : buttonList) {
-                            btn.setBackground(Color.decode("#ffffff"));;
+                            btn.setBackground(Color.decode("#ffffff"));
                             btn.setForeground(Color.decode("#000000"));// Menampilkan teks tombol
                         }
                         buttonCategory.setBackground(Color.decode("#02613C"));
                         buttonCategory.setForeground(Color.decode("#ffffff"));
-                        System.out.println("Button kategori: ");
+                        System.out.println("Button kategori: " + Category);
+                        
+                        loadCardsVerticalCategory();
+                        System.out.println("baiklah");
                     }
                 });
 
@@ -624,6 +703,11 @@ public class HomePage extends javax.swing.JFrame {
         jButtonSearchRecom.setBackground(new java.awt.Color(2, 97, 60));
         jButtonSearchRecom.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSearchRecom.setText("Cari");
+        jButtonSearchRecom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchRecomActionPerformed(evt);
+            }
+        });
 
         jPanelScrollRecom.setBackground(new java.awt.Color(242, 242, 238));
         jPanelScrollRecom.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
@@ -1233,7 +1317,6 @@ public class HomePage extends javax.swing.JFrame {
 //        jButtonRecom.putClientProperty( "JButton.buttonType", "roundRect" );
 //        jButtonRecom.setBorder(BorderFactory.createLineBorder(Color.WHITE, 0));
 //        jButtonRecom.setBorder(null);
-        
 //        jButtonRecom.setEnabled(false);
     }//GEN-LAST:event_jButtonRecomActionPerformed
 
@@ -1335,6 +1418,38 @@ public class HomePage extends javax.swing.JFrame {
         simpanData();
         createCards();
     }//GEN-LAST:event_jButtonSubmitActionPerformed
+
+    private void jButtonSearchRecomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchRecomActionPerformed
+        // TODO add your handling code here:
+        if (jTextFieldSearchRecom.getText().trim().isEmpty()) {
+            Search = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+            createCards();
+        } else {
+            String isi = jTextFieldSearchRecom.getText();
+            Search = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah "
+              + "FROM makanan "
+              + "JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah "
+              + "WHERE makanan.nama_makanan LIKE '%" + isi + "%' "
+              + "OR makanan.bahan_utama LIKE '%" + isi + "%' "
+              + "OR wilayah.wilayah LIKE '%" + isi + "%';";
+            
+            System.out.println(Search);
+                jPanelScrollRecom.setLayout(new GridLayout(0, 1, 10, 10));
+                System.out.println("jalan 2");
+            
+            createCards();
+            System.out.println(Data);
+            if(!Data){
+                jPanelScrollRecom.setLayout(new BoxLayout(jPanelScrollRecom, BoxLayout.X_AXIS));
+                JPanel gambar = new JPanel();
+                gambar.setBackground(Color.red);
+                System.out.println("jalan 2");
+                jPanelScrollRecom.add(gambar);
+                
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonSearchRecomActionPerformed
     
     private void pilihFoto() {
         JFileChooser fileChooser = new JFileChooser();
@@ -1347,6 +1462,32 @@ public class HomePage extends javax.swing.JFrame {
 
         }
     }
+    
+    private void load_comboBoxKaryawanProyek(){
+        try {
+            jComboBoxAsal.removeAllItems();
+            
+            String sql = "select wilayah from wilayah";
+          
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            
+            while (res.next()){
+                String namaKaryawan = res.getString("wilayah");
+                jComboBoxAsal.addItem(namaKaryawan);
+            } 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 
@@ -1371,7 +1512,8 @@ public class HomePage extends javax.swing.JFrame {
                 FileInputStream fis = new FileInputStream(selectedFile);
                 pst.setBinaryStream(7, fis, (int) selectedFile.length());
                 
-                pst.setInt(8,5);
+                String namaAsal = String.valueOf(jComboBoxAsal.getSelectedItem());
+                pst.setInt(8, getIdWilayah(namaAsal));
                 pst.setString(9, "unavailable");
                 
                 pst.execute();

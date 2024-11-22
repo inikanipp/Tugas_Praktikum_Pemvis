@@ -69,25 +69,30 @@ public class loginPage extends javax.swing.JFrame {
             java.sql.ResultSet res = stm.executeQuery(sql);
             boolean foundAccount = false;
             String username = "";
-            int level = 0;
+            int level = 0, idUser = 0;
             while (res.next()){
                 if (jTextFieldUsernameUserLogin.getText().equals(res.getString("username")) &&
                         new String(jPasswordFieldUserLogin.getPassword()).equals(res.getString("password"))) {
                             foundAccount = true;
                             username = res.getString("username");
                             level = res.getInt("level");
+                            idUser = res.getInt("id_user");
                             
-}               
-                if(foundAccount){
+                        }            
+            if(foundAccount){
                     HomePage.setUsernameHome(username);
                     HomePage.setlevelUser(level);
+                    HomePage.setidUser(idUser);
                     HomePage home = new HomePage();
                     home.setVisible(true);
                     dispose();
+                    
                 }else{
                     JOptionPane.showMessageDialog(this, "anda belum login", "warning", JOptionPane.WARNING_MESSAGE);
                 }
-            }
+            }   
+                
+            
             
             System.out.println("njay");
         }catch(Exception e){

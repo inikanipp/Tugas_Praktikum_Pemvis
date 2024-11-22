@@ -4,6 +4,10 @@
  */
 package projectakhir;
 
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author Admin
@@ -28,7 +32,11 @@ public class username {
 
     protected void setLevel(int level){
         this.level = level;
+        
     }
+    
+   
+
     
     
 }
