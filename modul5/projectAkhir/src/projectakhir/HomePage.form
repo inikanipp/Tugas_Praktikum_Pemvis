@@ -480,10 +480,12 @@
                                       <Component id="jLabelBahanUtama1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jTextFieldBahanUtama" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxAsal" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="jButtonPilihFoto" alignment="1" pref="36" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jButtonPilihFoto" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jTextFieldBahanUtama" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxAsal" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   <Component id="jLabelLangkah" min="-2" pref="28" max="-2" attributes="0"/>

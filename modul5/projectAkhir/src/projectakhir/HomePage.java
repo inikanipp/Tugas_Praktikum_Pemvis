@@ -99,6 +99,7 @@ public class HomePage extends javax.swing.JFrame {
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
 
         try {
+            jPanelScrollRecom.removeAll();
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
             Font fontm24 = Font.createFont(Font.TRUETYPE_FONT, fontStyleM1).deriveFont(24f);
             
@@ -245,7 +246,14 @@ public class HomePage extends javax.swing.JFrame {
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
             Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
             
-            for (int i = 1; i <= 5; i++) {
+            String sql = "SELECT makanan.nama_makanan, wilayah.wilayah, makanan.bahan_utama, makanan.gambar FROM favorite JOIN makanan ON favorite.id_makanan = makanan.id_makanan JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah WHERE favorite.id_user = ?;";
+            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, 3);
+  
+            java.sql.ResultSet res = ps.executeQuery();;
+            
+            while (res.next()){
             // ini untuk card utama
             JPanel card = new JPanel();
             card.setBackground(Color.decode("#ffffff")); // Variasi warna
@@ -259,6 +267,22 @@ public class HomePage extends javax.swing.JFrame {
             pic.setBackground(Color.red); // Variasi warna
             pic.setPreferredSize(new Dimension(180, 180));
             pic.putClientProperty( FlatClientProperties.STYLE, "arc: 16" );
+            pic.setLayout(new BoxLayout(pic, BoxLayout.Y_AXIS));
+            
+            JLabel labelGambar = new JLabel();
+            labelGambar.setFont(new Font("Arial", Font.BOLD, 16));
+            
+             // Ambil gambar sebagai byte[]
+            byte[] imgBytes = res.getBytes("gambar");
+
+            // Konversi byte[] ke ImageIcon
+            ImageIcon icon = new ImageIcon(imgBytes);
+
+            // Ubah ukuran gambar (misal: 200x200)
+            Image scaledImage = icon.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+            labelGambar.setIcon(new ImageIcon(scaledImage));
+            
+            pic.add(labelGambar);
             
             // ini untuk content
             JPanel content = new JPanel();
@@ -292,8 +316,8 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
                 contentBox2.add(isiContentBox2Bottom);
                 
-                int buttonValue = i; // Salinan nilai i untuk digunakan dalam listener
-                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+                int buttonValue = 5; // Salinan nilai i untuk digunakan dalam listener
+                JButton buttonDetail = new JButton("Detail : ");
 
                 // Menambahkan ActionListener untuk menangkap klik
                 buttonDetail.addActionListener(new ActionListener() {
@@ -320,18 +344,18 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.add(buttonDetail);
                 
                 // ini untuk judul card
-                JLabel labelJudul = new JLabel("Card " + i, SwingConstants.LEFT);
+                JLabel labelJudul = new JLabel(res.getString("nama_makanan"), SwingConstants.LEFT);
                 labelJudul.setFont(fontm24);
                 contentBox1.add(labelJudul);
             
                 // ini untuk lokasi
-                JLabel labelLokasi = new JLabel("Ngawi, Jawa Timur", SwingConstants.LEFT);
+                JLabel labelLokasi = new JLabel(res.getString("wilayah"), SwingConstants.LEFT);
                 labelLokasi.setFont(fontr14);
                 contentBox1.add(labelLokasi);
                 
 
                 // ini untuk lokasi
-                JLabel labelBahanUtama = new JLabel("Batu Bara, Pacul, Krikil", SwingConstants.LEFT);
+                JLabel labelBahanUtama = new JLabel(res.getString("bahan_utama"), SwingConstants.LEFT);
                 labelBahanUtama.setFont(fontr14);
                 contentBox1.add(labelBahanUtama);
                 
@@ -839,10 +863,11 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(jLabelAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelBahanUtama1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPilihFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonPilihFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelCreateRecipe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldBahanUtama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxAsal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16)
                 .addComponent(jLabelLangkah, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1308,6 +1333,7 @@ public class HomePage extends javax.swing.JFrame {
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         // TODO add your handling code here:
         simpanData();
+        createCards();
     }//GEN-LAST:event_jButtonSubmitActionPerformed
     
     private void pilihFoto() {
