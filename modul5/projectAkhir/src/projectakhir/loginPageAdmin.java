@@ -40,12 +40,6 @@ public class loginPageAdmin extends javax.swing.JFrame {
             jLabelLoginPage1.setFont(fontsb40);
             jButtonUserLoginGreen.setFont(fontm16);
             
-            
-            jLabelUsernameUserLogin.setFont(fontRegular14);
-            jLabelUsernameUserLogin.setForeground(Color.decode("#7D7D7D"));
-            jLabelPasswordUserLogin.setFont(fontRegular14);
-            jLabelPasswordUserLogin.setForeground(Color.decode("#7D7D7D"));
-            
         }catch(Exception e){
             e.printStackTrace();
             
@@ -62,13 +56,10 @@ public class loginPageAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextFieldUsernameUserLogin = new javax.swing.JTextField();
         jButtonUserLoginGreen = new javax.swing.JButton();
-        jLabelUsernameUserLogin = new javax.swing.JLabel();
-        jLabelPasswordUserLogin = new javax.swing.JLabel();
-        jPasswordFieldUserLogin = new javax.swing.JPasswordField();
         jLabelLoginPage = new javax.swing.JLabel();
         jLabelLoginPage1 = new javax.swing.JLabel();
+        jLabelGambarAtmin = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanelGreenHomePage = new javax.swing.JPanel();
 
@@ -88,15 +79,13 @@ public class loginPageAdmin extends javax.swing.JFrame {
             }
         });
 
-        jLabelUsernameUserLogin.setText("username");
-
-        jLabelPasswordUserLogin.setText("password");
-
         jLabelLoginPage.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelLoginPage.setText("Atmin");
 
         jLabelLoginPage1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabelLoginPage1.setText("Welcome Back");
+
+        jLabelGambarAtmin.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\Documents\\nip\\Tugas_Praktikum_Pemvis\\modul5\\projectAkhir\\src\\font\\atmin.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,15 +94,11 @@ public class loginPageAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonUserLoginGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLoginPage)
-                    .addComponent(jLabelPasswordUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLoginPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextFieldUsernameUserLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                        .addComponent(jPasswordFieldUserLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonUserLoginGreen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addComponent(jLabelGambarAtmin, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,17 +107,11 @@ public class loginPageAdmin extends javax.swing.JFrame {
                 .addComponent(jLabelLoginPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelLoginPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabelUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldUsernameUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPasswordUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addComponent(jLabelGambarAtmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonUserLoginGreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
 
         getContentPane().add(jPanel1);
@@ -178,6 +157,9 @@ public class loginPageAdmin extends javax.swing.JFrame {
 
     private void jButtonUserLoginGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUserLoginGreenActionPerformed
         // TODO add your handling code here:
+        iniAdmin1 atmin = new iniAdmin1();
+        atmin.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonUserLoginGreenActionPerformed
 
     /**
@@ -209,14 +191,11 @@ public class loginPageAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonUserLoginGreen;
+    private javax.swing.JLabel jLabelGambarAtmin;
     private javax.swing.JLabel jLabelLoginPage;
     private javax.swing.JLabel jLabelLoginPage1;
-    private javax.swing.JLabel jLabelPasswordUserLogin;
-    private javax.swing.JLabel jLabelUsernameUserLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelGreenHomePage;
-    private javax.swing.JPasswordField jPasswordFieldUserLogin;
-    private javax.swing.JTextField jTextFieldUsernameUserLogin;
     // End of variables declaration//GEN-END:variables
 }

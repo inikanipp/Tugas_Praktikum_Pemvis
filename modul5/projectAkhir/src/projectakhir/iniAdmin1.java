@@ -138,7 +138,6 @@ public class iniAdmin1 extends javax.swing.JFrame {
         jPanelTop1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabelNamaUserHome = new javax.swing.JLabel();
-        jLabelKata = new javax.swing.JLabel();
         jPanelProfileShapeAdmin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -472,11 +471,8 @@ public class iniAdmin1 extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout(2, 0));
 
         jLabelNamaUserHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelNamaUserHome.setText("ini Nama");
+        jLabelNamaUserHome.setText("Halo Atmin");
         jPanel1.add(jLabelNamaUserHome);
-
-        jLabelKata.setText("cobaaaa");
-        jPanel1.add(jLabelKata);
 
         jPanelProfileShapeAdmin.setBackground(new java.awt.Color(2, 97, 60));
         jPanelProfileShapeAdmin.setPreferredSize(new java.awt.Dimension(54, 54));
@@ -752,8 +748,7 @@ public class iniAdmin1 extends javax.swing.JFrame {
            
             jLabelNamaUserHome.setForeground(Color.black);
             jLabelNamaUserHome.setFont(fontm18);
-            jLabelKata.setForeground(Color.black);
-            jLabelKata.setFont(fontRegular12);
+          
             
         }catch(Exception e){
             e.printStackTrace(); 
@@ -800,7 +795,6 @@ public class iniAdmin1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBahanUtama;
     private javax.swing.JLabel jLabelDeskripsi1;
     private javax.swing.JLabel jLabelGambarAtmin;
-    private javax.swing.JLabel jLabelKata;
     private javax.swing.JLabel jLabelLangkah;
     private javax.swing.JLabel jLabelNamaKuliner;
     private javax.swing.JLabel jLabelNamaUserHome;
