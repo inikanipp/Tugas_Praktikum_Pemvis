@@ -100,6 +100,7 @@ public class iniDetail extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextAreaDeskripsi2Detail = new javax.swing.JTextArea();
         jTextFieldAsalDetail = new javax.swing.JTextField();
+        jButtonBackDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -196,6 +197,15 @@ public class iniDetail extends javax.swing.JFrame {
             }
         });
 
+        jButtonBackDetail.setBackground(new java.awt.Color(233, 157, 40));
+        jButtonBackDetail.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBackDetail.setText("Back");
+        jButtonBackDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackDetailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCreateRecipeDetailLayout = new javax.swing.GroupLayout(jPanelCreateRecipeDetail);
         jPanelCreateRecipeDetail.setLayout(jPanelCreateRecipeDetailLayout);
         jPanelCreateRecipeDetailLayout.setHorizontalGroup(
@@ -233,7 +243,10 @@ public class iniDetail extends javax.swing.JFrame {
                     .addComponent(jLabelSejarah1Detail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonNextDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCreateRecipeDetailLayout.createSequentialGroup()
+                        .addComponent(jButtonBackDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonNextDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanelCreateRecipeDetailLayout.setVerticalGroup(
@@ -274,7 +287,9 @@ public class iniDetail extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonNextDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelCreateRecipeDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonNextDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonBackDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -293,12 +308,19 @@ public class iniDetail extends javax.swing.JFrame {
     private void jButtonNextDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextDetailActionPerformed
         // TODO add your handling code here:
         HomePage me = new HomePage();
-        me
+        
     }//GEN-LAST:event_jButtonNextDetailActionPerformed
 
     private void jTextFieldAsalDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAsalDetailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAsalDetailActionPerformed
+
+    private void jButtonBackDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackDetailActionPerformed
+        // TODO add your handling code here:
+        HomePage home = new HomePage();
+        home.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonBackDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,6 +353,7 @@ public class iniDetail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBackDetail;
     private javax.swing.JButton jButtonNextDetail;
     private javax.swing.JLabel jLabelAsalDetail;
     private javax.swing.JLabel jLabelBahanUtamaDetail;

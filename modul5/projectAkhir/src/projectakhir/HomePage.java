@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.KeyStore;
 import java.sql.PreparedStatement;
 import javax.swing.JFileChooser;
 
@@ -38,8 +39,8 @@ public class HomePage extends javax.swing.JFrame {
     private static String UsernameHome;
     private static int idUser, levelUser;
     private static boolean Data = false;
-    private String Category = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
-    private String Search = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+    private String Category = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah WHERE status = 'available';";
+    private String Search = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah WHERE status = 'available';";
     
     File selectedFile;
     
@@ -84,9 +85,9 @@ public class HomePage extends javax.swing.JFrame {
         }
         
     }
-    public void showPanel(String panelName) {
-        jPanelCenter1.show(cardPanel, panelName);
-    }
+//    public void showPanel(String panelName) {
+//        jPanelCenter1.show(cardPanel, panelName);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,7 +120,7 @@ public class HomePage extends javax.swing.JFrame {
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
             Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
 
-            String sql = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah;";
+            String sql = "SELECT makanan.id_makanan, makanan.gambar, makanan.nama_makanan, makanan.bahan_utama, wilayah.wilayah AS nama_wilayah FROM makanan JOIN wilayah ON  makanan.id_wilayah = wilayah.id_wilayah; AND status = 'available'";
             String sql1 = "SELECT * FROM makanan";
             
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
@@ -191,27 +192,47 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.setBackground(Color.white);
                 isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
                 contentBox2.add(isiContentBox2Bottom);
+                int IdMakanan = res.getInt("id_makanan");
                 
-                int buttonValue = 5; // Salinan nilai i untuk digunakan dalam listener
-                JButton buttonDetail = new JButton("Detail : " + buttonValue);
+                
+                JButton buttonDetail = new JButton("Detail");
 
                 // Menambahkan ActionListener untuk menangkap klik
                 buttonDetail.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
+                        iniDetail.setUsernameHome(IdMakanan);
+                        iniDetail detail = new iniDetail();
+                        detail.setVisible(true);
+                        dispose();
                     }
                 });
                 
-                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+                JButton buttonFavorite = new JButton("Favorite");
 
                 // Menambahkan ActionListener untuk menangkap klik
                 buttonFavorite.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
+                        try {
+                            String sql = "INSERT INTO favorite (id_user, id_makanan) VALUES (?, ?)";
+                            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+                            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                                    pst.setInt(1, idUser);
+                                    pst.setInt(2, IdMakanan);
+                                    
+                                    
+
+                                    pst.execute();
+                                    loadCardsFavorite();
+                                    
+                                    JOptionPane.showMessageDialog(jPanelKategori, "Data berhasil disimpan!");
+
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(jPanelKategori, "Error: " + ex.getMessage());
+                        }
                     }
                 });
                 
@@ -279,7 +300,7 @@ public class HomePage extends javax.swing.JFrame {
     private void loadCardsFavorite() {
         // Set layout manager pada panel jika belum diatur melalui editor GUI
 //        jPanelScrollRecom.setLayout(new BoxLayout(this, ALLBITS)); // 1 baris, 5 kolom
-
+        jPanelScrollFavorite.removeAll();
         try {
             
             File fontStyleM1 = new File("src/font/Poppins-Medium.ttf");
@@ -288,7 +309,7 @@ public class HomePage extends javax.swing.JFrame {
             File fontStyleR = new File("src/font/Poppins-Regular.ttf");
             Font fontr14 = Font.createFont(Font.TRUETYPE_FONT, fontStyleR).deriveFont(14f);
             
-            String sql = "SELECT makanan.nama_makanan, wilayah.wilayah, makanan.bahan_utama, makanan.gambar FROM favorite JOIN makanan ON favorite.id_makanan = makanan.id_makanan JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah WHERE favorite.id_user = ?;";
+            String sql = "SELECT makanan.id_makanan, makanan.nama_makanan, wilayah.wilayah, makanan.bahan_utama, makanan.gambar FROM favorite JOIN makanan ON favorite.id_makanan = makanan.id_makanan JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah WHERE favorite.id_user = ?;";
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, idUser);
@@ -357,8 +378,8 @@ public class HomePage extends javax.swing.JFrame {
                 isiContentBox2Bottom.setBackground(Color.white);
                 isiContentBox2Bottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
                 contentBox2.add(isiContentBox2Bottom);
-                
-                int buttonValue = 5; // Salinan nilai i untuk digunakan dalam listener
+                 int IdMakanan = res.getInt("id_makanan");
+       
                 JButton buttonDetail = new JButton("Detail : ");
 
                 // Menambahkan ActionListener untuk menangkap klik
@@ -366,23 +387,20 @@ public class HomePage extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
+                        iniDetail.setUsernameHome(IdMakanan);
+                        iniDetail detail = new iniDetail();
+                        detail.setVisible(true);
+                        dispose();
                     }
                 });
                 
-                JButton buttonFavorite = new JButton("Favorite :  " + buttonValue);
+                
 
                 // Menambahkan ActionListener untuk menangkap klik
-                buttonFavorite.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
-                    }
-                });
+               
                 
                 // nambahin 2 tombol
-                isiContentBox2Bottom.add(buttonFavorite);
+               
                 isiContentBox2Bottom.add(buttonDetail);
                 
                 // ini untuk judul card
@@ -413,6 +431,8 @@ public class HomePage extends javax.swing.JFrame {
         jPanelScrollRecom.revalidate();
         jPanelScrollRecom.repaint();
         } catch (Exception e) {
+            e.printStackTrace(); // Menampilkan detail error pada konsol
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }
@@ -438,6 +458,7 @@ public class HomePage extends javax.swing.JFrame {
             java.sql.Connection conn = (Connection) koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql2);
+            System.out.println("lohhh");
             
             
             while (res.next()){
@@ -526,7 +547,23 @@ public class HomePage extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol diklik
-                        System.out.println("Button clicked: " + buttonValue);
+                        try {
+                            String sql = "INSERT INTO favorite (id_user, id_makanan) VALUES (?, ?)";
+                            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+                            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                                    pst.setInt(1, idUser);
+                                    pst.setInt(2, IdMakanan);
+                                    
+                                    
+
+                                    pst.execute();
+                                    loadCardsFavorite();
+                                    
+                                    JOptionPane.showMessageDialog(jPanelKategori, "Data berhasil disimpan!");
+
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(jPanelKategori, "Error: " + ex.getMessage());
+                        }
                     }
                 });
                 
@@ -597,7 +634,7 @@ public class HomePage extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Cetak nilai i saat tombol 
-                        Category = "SELECT Makanan.nama_makanan ,Makanan.gambar, Wilayah.wilayah AS nama_wilayah, Makanan.bahan_utama FROM  Makanan JOIN  Wilayah ON Makanan.id_wilayah = Wilayah.id_wilayah WHERE Wilayah.wilayah = '"+namaWilayah+"';";
+                        Category = "SELECT Makanan.nama_makanan, Makanan.id_makanan ,Makanan.gambar, Wilayah.wilayah AS nama_wilayah, Makanan.bahan_utama FROM  Makanan JOIN  Wilayah ON Makanan.id_wilayah = Wilayah.id_wilayah WHERE Wilayah.wilayah = '"+namaWilayah+"' AND status = 'available';;";
                         
                         for (JButton btn : buttonList) {
                             btn.setBackground(Color.decode("#ffffff"));
@@ -1417,6 +1454,7 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         simpanData();
         createCards();
+        loadCardsVerticalCategory();;
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void jButtonSearchRecomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchRecomActionPerformed
@@ -1431,7 +1469,7 @@ public class HomePage extends javax.swing.JFrame {
               + "JOIN wilayah ON makanan.id_wilayah = wilayah.id_wilayah "
               + "WHERE makanan.nama_makanan LIKE '%" + isi + "%' "
               + "OR makanan.bahan_utama LIKE '%" + isi + "%' "
-              + "OR wilayah.wilayah LIKE '%" + isi + "%';";
+              + "OR wilayah.wilayah LIKE '%" + isi + "%' AND status = 'available';";
             
             System.out.println(Search);
                 jPanelScrollRecom.setLayout(new GridLayout(0, 1, 10, 10));
