@@ -712,6 +712,7 @@ public class HomePage extends javax.swing.JFrame {
         jButtonCategory = new javax.swing.JButton();
         jButtonAddRecipe = new javax.swing.JButton();
         jButtonFavorite = new javax.swing.JButton();
+        jButtonLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(969, 716));
@@ -1225,6 +1226,13 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        jButtonLogOut.setBackground(new java.awt.Color(242, 242, 238));
+        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLeft1Layout = new javax.swing.GroupLayout(jPanelLeft1);
         jPanelLeft1.setLayout(jPanelLeft1Layout);
         jPanelLeft1Layout.setHorizontalGroup(
@@ -1232,6 +1240,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanelLeft1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelLeft1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonFavorite, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAddRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1249,7 +1258,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jButtonAddRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonFavorite, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(jButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
@@ -1459,6 +1470,14 @@ public class HomePage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonSearchRecomActionPerformed
+
+    private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
+        // TODO add your handling code here:
+        loginPage home = new loginPage();
+                        home.setVisible(true);
+                        this.dispose();
+                        
+    }//GEN-LAST:event_jButtonLogOutActionPerformed
     
     private void pilihFoto() {
         JFileChooser fileChooser = new JFileChooser();
@@ -1560,6 +1579,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCreateDeskripsi;
     private javax.swing.JButton jButtonCreateRecipe;
     private javax.swing.JButton jButtonFavorite;
+    private javax.swing.JButton jButtonLogOut;
     private javax.swing.JButton jButtonNext;
     private javax.swing.JButton jButtonPilihFoto;
     private javax.swing.JButton jButtonRecom;

@@ -99,7 +99,7 @@ public class registerPage extends javax.swing.JFrame {
                         HomePage.setidUser(username);
                         HomePage home = new HomePage();
                         home.setVisible(true);
-                        dispose();
+                        this.dispose();
         } catch (Exception e) {
             System.out.println("Error! " + e.getMessage());
         }

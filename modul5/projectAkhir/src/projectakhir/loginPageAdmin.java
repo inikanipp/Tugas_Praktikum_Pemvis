@@ -159,7 +159,7 @@ public class loginPageAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         iniAdmin1 atmin = new iniAdmin1();
         atmin.setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonUserLoginGreenActionPerformed
 
     /**

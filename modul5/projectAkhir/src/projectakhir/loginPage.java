@@ -81,19 +81,20 @@ public class loginPage extends javax.swing.JFrame {
                             level = res.getInt("level");
                             idUser = res.getInt("id_user");
                             System.out.println(foundAccount);
-                            
-                        }            
-                    if(foundAccount){
+                        }                 
+            }   
+            
+            
+            if(foundAccount){
                         HomePage.setUsernameHome(username);
                         HomePage.setlevelUser(level);
                         HomePage.setidUser(idUser);
                         HomePage home = new HomePage();
                         home.setVisible(true);
-                        dispose();
+                        this.dispose();
 
                     }
-                    
-            }   
+            
             if(foundAccount == false){
                 System.out.println(foundAccount);
                         JOptionPane.showMessageDialog(this, "anda belum login", "warning", JOptionPane.WARNING_MESSAGE);
